@@ -1,0 +1,11 @@
+services:
+  frontend:
+    container_name: React
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app # Para sincronizar arquivos no desenvolvimento
+      - /app/node_modules # Ignorar node_modules
