@@ -1,18 +1,20 @@
 import React from "react";
 import styles from './InputField.module.css';
 
-interface InputFieldProps {
-    type: string;
-    name?: string;
-    placeholder?: string;
-    required?: boolean;
+
+interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    variant?: string;
+    htmlFor?: string;
+    label?: string;
 }
 
-const InputField: React.FC<InputFieldProps> = ({type, name, ...rest}) => {
+const InputField: React.FC<InputFieldProps> = ({variant, htmlFor, label, ...rest}) => {
     return(
-        <input type={type} name={name} {...rest}/>
+        <div className={styles.InputContainer}>
+            <label className={styles.InputLabel} htmlFor={htmlFor}>{label}</label>
+            <input className={`${styles.InputArea} ${variant}`} name={htmlFor} {...rest}/> 
+        </div>
     );
 }
-
 
 export default InputField
