@@ -1,10 +1,10 @@
 import {useRef} from 'react';
 import InputField from "../../components/input-field/InputField";
+import api from "../../services/api"
 import "./StyleRegistrationPage.css";
 
 
 const RegistrationPage = () => {
-    const apiURL = import.meta.env.VITE_API_URL;
 
     const inputName = useRef<HTMLInputElement>(null);
     const inputLastName = useRef<HTMLInputElement>(null);
@@ -12,8 +12,10 @@ const RegistrationPage = () => {
     const inputEmail = useRef<HTMLInputElement>(null);
     const inputPassword = useRef<HTMLInputElement>(null);
 
+    //Verificar jeito seguro de passar a senha para o server
+    //Verrificar se current? está correto
     async function registerUsers(){
-        await apiURL.post('/usuarios', {
+        await api.post('/usuarios', {
             name: inputName.current?.value,
             lastName: inputLastName.current?.value,
             nickName: inputNickName.current?.value,
