@@ -1,0 +1,28 @@
+/* Personalizar a cor de fundo do Navbar */
+.navbar {
+  background-color: #4caf50 !important; /* Substitua pela cor desejada */
+  min-height: 10vh;
+}
+
+/* Personalizar o texto e links no Navbar */
+.navbar .navbar-brand {
+  color: #ffffff !important; /* Cor do texto do título */
+}
+
+.navbar .nav-link {
+  color: #ffffff !important; /* Cor dos links */
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: #ffd700 !important; /* Cor do texto ao passar o mouse */
+}
+
+/* Personalizar o botão de toggle (para telas pequenas) */
+.navbar-toggler {
+  border-color: #ffffff !important;
+}
+
+.navbar-toggler-icon {
+  background-color: #ffffff; /* Ícone do toggle */
+}
