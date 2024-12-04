@@ -72,6 +72,7 @@
 }
 
 .usuario,
+.email,
 .senha {
   width: 100%;
   padding: 12px;
@@ -90,7 +91,7 @@
 .togglePassword {
   position: absolute;
   right: 10px;
-  top: 23px;
+  top: -54px;
   transform: translateY(-50%);
   background: none;
   border: none;
