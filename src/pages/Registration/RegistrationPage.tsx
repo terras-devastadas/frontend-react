@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import InputField from "../../components/input-field/InputField";
+import InputField from "../../components/InputField/InputField";
 import api from "../../services/api";
 import "./StyleRegistrationPage.css";
 import { useNavigate } from "react-router-dom";

@@ -3,10 +3,10 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App.tsx";
-import HomePage from "./pages/HomePage.tsx";
+import HomePage from "./pages/Home/HomePage.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
-import LoginPage from "./pages/LoginPage.tsx";
-import RegistrationPage from "./pages/registration-page/RegistrationPage.tsx";
+import LoginPage from "./pages/Login/LoginPage.tsx";
+import RegistrationPage from "./pages/Registration/RegistrationPage.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
