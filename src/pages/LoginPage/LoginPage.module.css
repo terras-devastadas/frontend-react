@@ -1,0 +1,52 @@
+/* Página com fundo */
+.page {
+  background-color: #a0b1c9;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container do formulário */
+.container {
+  max-width: 400px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #343a40;
+}
+
+/* Campo de senha com ícone */
+.passwordContainer {
+  position: relative;
+}
+
+.passwordContainer input {
+  padding-right: 40px; /* Espaço para o ícone */
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6c757d;
+}
+
+/* Toast personalizado */
+.toast {
+  position: fixed;
+  top: 67px;
+  right: 10px;
+  z-index: 1050; /* Para garantir que fique acima de outros elementos */
+  background-color: #dc3545 !important; /* Cor do fundo (vermelho para erro) */
+  color: white; /* Cor do texto do Toast */
+}
