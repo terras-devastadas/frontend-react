@@ -1,7 +1,17 @@
-const HomePage = () => {
-  return (
-    <div>HomePage</div>
-  )
-}
+import { useEffect } from "react";
+import api from "../services/api";
 
-export default HomePage
+const HomePage = () => {
+  useEffect(() => {
+    const testIntegration = () => {
+      api.get("items/").then((response) => {
+        console.log(response);
+      });
+    };
+    testIntegration();
+  }, []);
+
+  return <div>HomePage</div>;
+};
+
+export default HomePage;

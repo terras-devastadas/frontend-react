@@ -1,22 +1,26 @@
-import React, { useState, useEffect, useRef } from 'react';
-import lasagneLogo from '../assets/lasagneLogo.png';
-import visible from '../assets/visible.png';
-import styles from './LoginPage.module.css';
-import { Link, useNavigate } from 'react-router-dom';
-import api from '../services/api';
-import InputField from '../components/input-field/InputField';
-import axios from 'axios';
+import { useState, useRef, useEffect } from "react";
+import lasagneLogo from "../assets/lasagneLogo.png";
+import visible from "../assets/visible.png";
+import styles from "./LoginPage.module.css";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../services/api";
+import InputField from "../components/input-field/InputField";
 
 function LoginPage() {
-
   const inputUsername = useRef<HTMLInputElement>(null);
-  const inputEmail = useRef<HTMLInputElement>(null);
   const inputPassword = useRef<HTMLInputElement>(null);
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    api.post('logout/').then((response) => {
+      console.log(response)
+    })
+  }, [])
+  
 
   // Função para alternar visibilidade da senha
   const togglePasswordVisibility = () => {
@@ -26,33 +30,39 @@ function LoginPage() {
   // Função para fazer login
   async function handleLogin() {
     const username = inputUsername.current?.value;
-    const email = inputEmail.current?.value;
     const password = inputPassword.current?.value;
 
     if (!username || !password) {
-      setErrorMessage('Por favor, preencha todos os campos.');
+      setErrorMessage("Por favor, preencha todos os campos.");
       return;
     }
 
     setLoading(true);
-    setErrorMessage('');
+    setErrorMessage("");
 
     try {
-      const response = await api.post('/accounts/login/', {
+      const response = await api.post("/login/", {
         username,
-        email,
         password,
       });
 
       if (response.status === 200) {
-        // Redireciona para a página do usuário ou dashboard após login bem-sucedido
-        navigate('/');
+        navigate("/");
+        localStorage.setItem('Token', response.data.token)
+        localStorage.setItem('User', JSON.stringify(response.data.user))
+        
+        // exemplo pra pegar o user
+        const userString = localStorage.getItem('User');
+        if (userString) {
+          const user = JSON.parse(userString);
+          console.log(`Bem vindo ${user.first_name}`)
+        }
       } else {
-        setErrorMessage('Usuário ou senha incorretos.');
+        setErrorMessage("Usuário ou senha incorretos.");
       }
     } catch (error) {
-      console.error('Erro de login:', error);
-      setErrorMessage('Ocorreu um erro ao tentar fazer login. Tente novamente.');
+      console.error("Erro de login:", error);
+      setErrorMessage("Ocorreu um erro ao tentar fazer login. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -68,47 +78,20 @@ function LoginPage() {
       <div className={styles.bodyLogin}>
         <div className={styles.loginBox}>
           <h1 className={styles.titleLogin}>LOGIN</h1>
-          <InputField
-            className={styles.usuario}
-            htmlFor="username"
-            label="Usuário:"
-            ref={inputUsername}
-            required
-          />
-          <InputField
-            className={styles.email}
-            htmlFor="email"
-            label="Email"
-            ref={inputEmail}
-            required
-          />
-          <InputField
-            className={styles.senha}
-            type={passwordVisible ? 'text' : 'password'}
-            htmlFor="password"
-            label="Senha:"
-            ref={inputPassword}
-          />
+          <InputField className={styles.usuario} htmlFor="username" label="Usuário:" ref={inputUsername} required />
+          <InputField className={styles.senha} type={passwordVisible ? "text" : "password"} htmlFor="password" label="Senha:" ref={inputPassword} />
           <div className={styles.passwordWrapper}>
-            <img
-              src={visible}
-              alt="Toggle Password Visibility"
-              className={styles.togglePassword}
-              onClick={togglePasswordVisibility}
-              style={{ cursor: 'pointer' }}
-            />
+            <img src={visible} alt="Toggle Password Visibility" className={styles.togglePassword} onClick={togglePasswordVisibility} style={{ cursor: "pointer" }} />
           </div>
 
-          {errorMessage && (
-            <div className={styles.errorMessage}>{errorMessage}</div>
-          )}
+          {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
 
           <div className={styles.footer}>
             <Link to="/registration">
               <span className={styles.cadastro}>Não possui conta? Cadastre-se!</span>
             </Link>
             <button onClick={handleLogin} disabled={loading}>
-              {loading ? 'Entrando...' : 'Entrar'}
+              {loading ? "Entrando..." : "Entrar"}
             </button>
           </div>
         </div>
