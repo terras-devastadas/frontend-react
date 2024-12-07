@@ -34,11 +34,12 @@
     height: 100vh;
     background-color: #A0B1C9;
     padding-top: 0px;
+    color: #0B2548;
 }
 
 .bodyCreateCommunity {
     margin-left: 100px;
-    width: 100%;
+    width: 15000px;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -59,28 +60,107 @@
 
 .nomeComunidade,
 .descricaoComunidade {
-  width: 50%;
-  padding: 12px;
-  margin-bottom: 15px;
-  background-color: #A0B1C9;
-  border: 0px solid #A0B1C9;
-  border-radius: 25px;
-  font-size: 16px;
-  box-sizing: border-box;
+    width: 50%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background-color: #A0B1C9;
+    border: 0px solid #A0B1C9;
+    border-radius: 25px;
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
 .descricaoComunidade {
     height: 300px;
     vertical-align: text-top;
-    padding-top: 10px; /* Ajuste o padding-top para garantir que o texto comece no topo */
-  line-height: 1.5;  /* Ajuste o line-height para um espaçamento adequado entre as linhas */
-  resize: none; /* Opcional: impede que o usuário redimensione o textarea */
-  overflow-y: auto; /* Adiciona barra de rolagem, caso o texto ultrapasse a altura */
+    padding-top: 10px;
+    /* Ajuste o padding-top para garantir que o texto comece no topo */
+    line-height: 1.5;
+    /* Ajuste o line-height para um espaçamento adequado entre as linhas */
+    resize: none;
+    /* Opcional: impede que o usuário redimensione o textarea */
+    overflow-y: auto;
+    /* Adiciona barra de rolagem, caso o texto ultrapasse a altura */
 }
 
 .buttonCreate {
+        position: absolute;
+        display: flex;
+        width: 180px;
+        padding: 12px;
+        margin-top: 220px;
+        margin-left: -200px;
+        background-color: #0B2548;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 25px !important;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+}
+
+.linhaVert {
+    height: 450px;
+    border-right: 2px solid #0B2548;
+    display: flex;
+    position: absolute;
+    margin-right: -370px;
+    margin-top: 90px;
+}
+
+.visibilityText {
+    font-size: 23px;
+    margin-top: -476px;
+    margin-left: 420px;
     position: absolute;
     display: flex;
-    margin-top: 260px;
-    margin-left: -180px;
+    font-weight: bold;
+    color: #0B2548;
+}
+
+.buttonAlunos {
+    position: absolute;
+    width: 150px;
+    padding: 12px;
+    margin-top: -420px;
+    margin-left: 55px;
+    background-color: #4dac79;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px !important;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+.buttonTodos {
+    position: absolute;
+    width: 150px;
+    padding: 12px;
+    margin-top: -420px;
+    margin-left: 225px;
+    background-color: #4dac79;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px !important;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+.buttonAlunos:hover {
+    background-color: #196e41;
+}
+
+.buttonTodos:hover {
+    background-color: #196e41;
+}
+
+.buttonCreate:hover {
+    background-color: #041122;
 }

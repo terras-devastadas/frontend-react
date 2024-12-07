@@ -37,6 +37,9 @@ function CreateCommunity() {
                         ref={inputDescription}
                         required
                     />
+                    <h1 className={styles.visibilityText}>Visibilidade:</h1>
+                    <button className={styles.buttonAlunos}>Alunos</button>
+                    <button className={styles.buttonTodos}>Todos</button>
                 </div>
                 <div className={styles.footer}>
                     <button className={styles.buttonCreate} onClick={clickedCreate}>
@@ -44,6 +47,7 @@ function CreateCommunity() {
                     </button>
                 </div>
             </div>
+            <div className={styles.linhaVert}></div>
         </div>
 
 
