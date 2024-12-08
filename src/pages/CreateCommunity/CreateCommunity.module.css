@@ -1,0 +1,245 @@
+.headerBar {
+    background-color: #18A75B;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    padding: 7px 0px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.headerBar span {
+    color: #004420;
+    font-family: serif;
+    font-size: 2rem;
+    position: relative;
+    top: 3px;
+    left: 16px;
+}
+
+.headerBar img {
+    height: 50px;
+    width: auto;
+    align-items: center;
+    position: relative;
+    top: -3px;
+    left: 15px;
+}
+
+.createCommunityPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #A0B1C9;
+    padding-top: 0px;
+    color: #0B2548;
+}
+
+.bodyCreateCommunity {
+    margin-left: 100px;
+    width: 15000px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.createBox {
+    margin-top: 50px;
+    margin-left: 200px;
+    width: 800px;
+    height: 600px;
+    padding: 30px;
+    background-color: #D9D9D9;
+    border-radius: 25px;
+    text-align: center;
+    border: 3px solid #0B2548;
+}
+
+.nomeComunidade,
+.descricaoComunidade {
+    width: 50%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background-color: #A0B1C9;
+    border: 0px solid #A0B1C9;
+    border-radius: 25px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.descricaoComunidade {
+    height: 300px;
+    vertical-align: text-top;
+    padding-top: 10px;
+    line-height: 1.5;
+    resize: none;
+    overflow-y: auto;
+}
+
+.buttonCreate {
+    position: absolute;
+    display: flex;
+    width: 180px;
+    padding: 12px;
+    margin-top: 220px;
+    margin-left: -200px;
+    background-color: #0B2548;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px !important;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.linhaVert {
+    height: 450px;
+    border-right: 2px solid #0B2548;
+    display: flex;
+    position: absolute;
+    margin-right: -370px;
+    margin-top: 90px;
+}
+
+.visibilityText {
+    font-size: 23px;
+    margin-top: -476px;
+    margin-left: 420px;
+    position: absolute;
+    display: flex;
+    font-weight: bold;
+    color: #0B2548;
+}
+
+.buttonAlunos {
+    position: absolute;
+    width: 150px;
+    padding: 12px;
+    margin-top: -420px;
+    margin-left: 55px;
+    background-color: #4dac79;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px !important;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+.buttonTodos {
+    position: absolute;
+    width: 150px;
+    padding: 12px;
+    margin-top: -420px;
+    margin-left: 225px;
+    background-color: #4dac79;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px !important;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+.buttonAlunos:hover {
+    background-color: #196e41;
+}
+
+.buttonAlunos:enabled {
+    background-color: #196e41;
+}
+
+input[type="radio"]:checked+label {
+    background-color: #196e41;
+    color: white;
+    border-color: #196e41;
+}
+
+.buttonTodos:hover {
+    background-color: #196e41;
+}
+
+.buttonCreate:hover {
+    background-color: #041122;
+}
+
+.personalizarText {
+    font-size: 23px;
+    margin-top: -325px;
+    margin-left: 420px;
+    position: absolute;
+    display: flex;
+    font-weight: bold;
+    color: #0B2548;
+}
+
+.fileInput {
+    display: none;
+}
+
+.fileUploadButton {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    margin-top: -280px;
+    margin-left: 130px;
+}
+
+.fileUploadButton:hover {
+    background-color: #45a049;
+}
+
+.previewContainer {
+    margin-top: 65px;
+    text-align: center;
+    width: 100%;
+}
+
+.previewImage {
+    max-width: 270px;
+    max-height: 230px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: -430px;
+    margin-left: 420px;
+}
+
+.usuarioLeft {
+
+    height: 100%;
+    border-right: 600px solid #0B2548;
+    display: flex;
+    position: absolute;
+    margin-right: 1200px;
+    margin-top: 0px;
+
+}
+
+.username {
+    font-size: 25px;
+    color: #FFFFFF;
+    position: absolute;
+    margin-top: -180px;
+    margin-right: 1000px;
+}
+
+.userAvatar {
+    height: 130px;
+    position: absolute;
+    margin-top: -390px;
+    margin-right: 1000px;
+}
