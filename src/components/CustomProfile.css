@@ -1,0 +1,84 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5vh;
+  border: 1px solid #0a274f;
+  border-radius: 10px;
+  max-width: 35vw;
+  margin: auto;
+  background-color: #f9f9f9;
+}
+.profile-avatar {
+  width: 10vw;
+  border-radius: 50%;
+  margin-bottom: 3vh;
+}
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.profile-email {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+}
+.profile-bio {
+    font-family: Times New Roman;
+  font-size: 14px;
+  color: #000000;
+  text-align: center;
+  border: inset 2px;
+  padding: 2px;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-input,
+.profile-textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.profile-textarea {
+  resize: vertical;
+  height: 100vh;
+}
+
+.btn.btn-save {
+  background-color:  #0a274f;
+  color:  white;
+  padding: 5px 15px;
+  border: outset 2px;
+  border-radius: 5px;
+  margin-top: 5px;
+  cursor: pointer; /* Adicionar cursor para melhor feedback do usuário */
+}
+
+.btn.del {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-inline-start: 75%;
+}
+
+.btn.del:hover {
+  background-color: white;
+  border: groove red 2px;
+  color: red;
+}
+
+.btn.btn-save:hover {
+    border: inset 2px;
+}
+
+.profile-avatar-upload {
+  margin: 10px;
+}
