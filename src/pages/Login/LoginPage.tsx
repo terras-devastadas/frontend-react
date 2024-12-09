@@ -89,7 +89,7 @@ function LoginPage() {
             <Link to="/registration">
               <span className={styles.cadastro}>Não possui conta? Cadastre-se!</span>
             </Link>
-            <button onClick={handleLogin} disabled={loading}>
+            <button onClick={handleLogin} disabled={loading} className={styles.submitButton}>
               {loading ? "Entrando..." : "Entrar"}
             </button>
           </div>
