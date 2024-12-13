@@ -1,0 +1,144 @@
+
+.createBox {
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    color: #0B2548;
+    align-items: center;
+    padding: 0px 30px;
+    margin-top: 50px;
+    width: 800px;
+    height: 600px;
+    padding: 15px 30px;
+    background-color: #D9D9D9;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.titleCreate {
+    margin-bottom: 30px;
+}
+
+.contentBox{
+    display: flex;
+    width: 100%;
+    background-color: aqua;
+    height: 100%;
+}
+
+.rightBox, .leftBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    padding: 0px 30px;
+    background-color: blanchedalmond;
+}
+
+.rightBox {
+    border-left: 1px solid #0B2548;
+}
+
+.leftBox {
+    border-right: 1px solid #0B2548;
+}
+
+
+.visibilityText, .personalizarText {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.visibilityButtons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.buttonAlunos, .buttonTodos {
+    width: 100px;
+    padding: 5px 7px;
+    background-color: #4dac79;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttonAlunos:hover, .buttonTodos:hover {
+    background-color: #196e41;
+}
+
+.buttonAlunos:enabled {
+    background-color: #196e41;
+}
+
+input[type="radio"]:checked+label {
+    background-color: #196e41;
+    color: white;
+    /* border-color: #196e41; */
+}
+
+.none{
+    display: none;
+}
+
+.buttonCreate {
+    display: flex;
+    justify-content: center;
+    align-self: flex-end;
+    width: 200px;
+    padding: 7px 10px;
+    background-color: #0B2548;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttonCreate:hover {
+    background-color: #041122;
+}
+
+.fileInput {
+    display: none;
+}
+
+.fileUploadButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    width: 100%;
+    color: #555555;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.fileUploadButton:hover {
+    opacity: 0.7;
+}
+
+.previewContainer {
+    text-align: center;
+    margin-top: 65px;
+    width: 100%;
+}
+
+.previewImage {
+    max-width: 270px;
+    max-height: 230px;
+    object-fit: cover;
+    border-radius: 10px;
+}

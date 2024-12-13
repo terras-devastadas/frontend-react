@@ -27,3 +27,9 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.prymary .InputArea:focus{
+    width: 200px;
+    height: 300px;
+    outline: orangered;
+}
