@@ -8,7 +8,6 @@ import ErrorPage from "./pages/ErrorPage.tsx";
 import LoginPage from "./pages/Login/LoginPage.tsx";
 import RegistrationPage from "./pages/Registration/RegistrationPage.tsx";
 import CreateClassCommunityPage from "./pages/CreateClassCommunity/CreateClassCommunityPage.tsx";
-import CreateClassCommunityPageCopy from "./pages/CreateClassCommunity copy/CreateClassCommunityPageCopy.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
@@ -33,10 +32,6 @@ const router = createBrowserRouter([
       {
         path: "createClassCommunity",
         element: <CreateClassCommunityPage />,
-      },
-      {
-        path: "teste",
-        element: <CreateClassCommunityPageCopy />,
       }
     ],
   },
