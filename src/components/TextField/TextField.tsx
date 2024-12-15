@@ -1,22 +1,20 @@
-import React from 'react';
 import styles from './TextField.module.css';
+import React from 'react';
 
-interface TextFieldProps {
-    variant?: 'primary' | 'secondary';
-    htmlFor: string;
-    label: string;
-    required?: boolean;
+interface TextFieldProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+    variant?: 'primary' | 'secondary' | 'error' | 'success';
+    htmlFor?: string;
+    label?: string;
 }
 
-const TextField: React.FC<TextFieldProps> = ({ variant = 'primary', htmlFor, label, required }) => {
-    return (
-        <div className={`${styles.InputContainer} ${styles[variant]}`}>
-            <label htmlFor={htmlFor} className={styles.InputLabel}>
-                {label} {required && '*'}
-            </label>
-            <textarea id={htmlFor} className={styles.InputArea} required={required}></textarea>
+const TextField: React.FC<TextFieldProps> = ({variant, htmlFor, label, ...rest}) => {
+
+    return(
+        <div className={`${styles.InputContainer} ${variant ? styles[variant] : ''}`}>
+            <label className={styles.InputLabel} htmlFor={htmlFor}>{label}</label>
+            <textarea className={styles.InputArea} name={htmlFor} id={htmlFor} {...rest}/> 
         </div>
-    );
-};
+    )
+}
 
 export default TextField;

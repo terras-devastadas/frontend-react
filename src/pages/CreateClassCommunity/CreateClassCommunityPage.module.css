@@ -215,6 +215,10 @@ input[type="radio"]:checked+label {
     transition: background-color 0.3s ease;
 }
 
+.buttonCreate:disabled {
+    cursor: not-allowed;
+}
+
 .buttonCreate:hover {
     background-color: #041122;
 }
