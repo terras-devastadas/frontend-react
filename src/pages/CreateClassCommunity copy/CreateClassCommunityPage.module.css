@@ -1,4 +1,3 @@
-
 .createBox {
     display: flex;
     justify-self: center;
@@ -6,7 +5,7 @@
     color: #0B2548;
     align-items: center;
     padding: 0px 30px;
-    margin-top: 50px;
+    margin: 50px 0;
     width: 800px;
     height: 600px;
     padding: 15px 30px;
@@ -22,7 +21,6 @@
 .contentBox{
     display: flex;
     width: 100%;
-    background-color: aqua;
     height: 100%;
 }
 
@@ -31,22 +29,33 @@
     flex-direction: column;
     align-items: flex-start;
     width: 50%;
+    height: 100%;
     padding: 0px 30px;
-    background-color: blanchedalmond;
 }
 
 .rightBox {
+    position: relative;
     border-left: 1px solid #0B2548;
+    gap: 30px;
 }
 
 .leftBox {
     border-right: 1px solid #0B2548;
+    gap: 40px;
+}
+
+.bannerBox, .visibilityBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 
 .visibilityText, .personalizarText {
     font-size: 20px;
     font-weight: bold;
+    align-self: flex-start
 }
 
 .visibilityButtons {
@@ -56,7 +65,7 @@
     margin-top: 10px;
 }
 
-.buttonAlunos, .buttonTodos {
+.buttonProfessores, .buttonTodos {
     width: 100px;
     padding: 5px 7px;
     background-color: #4dac79;
@@ -66,14 +75,20 @@
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+    user-select: none;
     transition: background-color 0.3s ease;
+    margin: 0 10px; /* Add margin to create space between buttons */
 }
 
-.buttonAlunos:hover, .buttonTodos:hover {
+.buttonProfessores{
+    width: 150px;
+}
+
+.buttonProfessores:hover, .buttonTodos:hover {
     background-color: #196e41;
 }
 
-.buttonAlunos:enabled {
+.buttonProfessores:enabled {
     background-color: #196e41;
 }
 
@@ -83,14 +98,111 @@ input[type="radio"]:checked+label {
     /* border-color: #196e41; */
 }
 
+.passwordBox {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.passwordTitle{
+    font-size: 18px;
+}
+
+.passwordCheck {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #0B2548;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.passwordCheck:checked {
+    background-color: #0B2548;
+    border-color: #0B2548;
+}
+
+.passwordCheck:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
 .none{
     display: none;
 }
 
+.fileInput {
+    display: none;
+}
+
+.fileUploadButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #FFFFFF;
+    width: 230px;
+    color: #555555;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 15px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.fileUploadButton img {
+    width: 25px;
+}
+
+.fileUploadButton:hover {
+    opacity: 0.7;
+}
+
+.previewContainer {
+    text-align: center;
+    margin-top: 0;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.previewImage {
+    max-width: 270px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.skeleton {
+    background-color: #b1b1b183;
+    border-radius: 10px;
+    width: 230px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555555;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
 .buttonCreate {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
     display: flex;
     justify-content: center;
-    align-self: flex-end;
     width: 200px;
     padding: 7px 10px;
     background-color: #0B2548;
@@ -105,40 +217,4 @@ input[type="radio"]:checked+label {
 
 .buttonCreate:hover {
     background-color: #041122;
-}
-
-.fileInput {
-    display: none;
-}
-
-.fileUploadButton {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #FFFFFF;
-    width: 100%;
-    color: #555555;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.fileUploadButton:hover {
-    opacity: 0.7;
-}
-
-.previewContainer {
-    text-align: center;
-    margin-top: 65px;
-    width: 100%;
-}
-
-.previewImage {
-    max-width: 270px;
-    max-height: 230px;
-    object-fit: cover;
-    border-radius: 10px;
 }

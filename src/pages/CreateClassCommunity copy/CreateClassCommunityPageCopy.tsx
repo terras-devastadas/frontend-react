@@ -5,10 +5,13 @@ import TextField from '../../components/TextField/TextField'
 import addIcon from '../../assets/addIcon.png'
 
 const CreateClassCommunityPageCopy = () => {
-    // const inputName = useRef<HTMLInputElement>(null);
-    // const inputDescription = useRef<HTMLInputElement>(null);
-
     const [selectedOption, setSelectedOption] = useState<string>('');
+    const [selected, setSelected] = useState(false);
+    const [imagem, setImagem] = useState<string>('');
+
+    const handleCheckboxChange = () => {
+      setSelected(!selected);
+    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedOption(event.target.value);
@@ -19,8 +22,6 @@ const CreateClassCommunityPageCopy = () => {
         console.log("Hello World!");
         // Lógica ao clicar em criar comunidade
     };
-
-    const [imagem, setImagem] = useState<string>('');
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -41,57 +42,76 @@ const CreateClassCommunityPageCopy = () => {
             
             <div className={styles.contentBox}>
                 <div className={styles.leftBox}>
-                    <InputField className={styles.secondary} htmlFor="name" label="Nome da Comunidade:" required/>
-                    <TextField variant='secondary' htmlFor="description" label="Descrição:" required/>
+                    <InputField variant='primary' htmlFor="name" label="Nome da Comunidade:" required/>
+                    <TextField variant='primary' htmlFor="description" label="Descrição:" required/>
                 </div>
 
                 <div className={styles.rightBox}>
-                    <h1 className={styles.visibilityText}>Visibilidade:</h1>
+                    <div className={styles.visibilityBox}>
+                        <h1 className={styles.visibilityText}>Visibilidade:</h1>
 
-                    <form className={styles.visibilityButtons}>
-                        <div>
-                            <input
-                                type="radio"
-                                id="alunos"
-                                name="option"
-                                value="Alunos"
-                                checked={selectedOption === 'Alunos'}
-                                onChange={handleChange}
-                                className={styles.none}
-                                />
-                            <label htmlFor="alunos" className={styles.buttonAlunos}>Alunos</label>
-                        </div>
-                        <div>
-                            <input
-                                type="radio"
-                                id="todos"
-                                name="option"
-                                value="Todos"
-                                checked={selectedOption === 'Todos'}
-                                onChange={handleChange}
-                                className={styles.none}
-                                />
-                            <label htmlFor="todos" className={styles.buttonTodos}>Todos</label>
-                        </div>
-                    </form>
+                        <form >
+                            <div className={styles.visibilityButtons}>
+                                <div>
+                                    <input
+                                        type="radio"
+                                        id="Professores"
+                                        name="option"
+                                        value="Professores"
+                                        checked={selectedOption === 'Professores'}
+                                        onChange={handleChange}
+                                        className={styles.none}
+                                        />
+                                    <label htmlFor="Professores" className={styles.buttonProfessores}>Professores</label>
+                                </div>
+                                <div>
+                                    <input
+                                        type="radio"
+                                        id="todos"
+                                        name="option"
+                                        value="Todos"
+                                        checked={selectedOption === 'Todos'}
+                                        onChange={handleChange}
+                                        className={styles.none}
+                                        />
+                                    <label htmlFor="todos" className={styles.buttonTodos}>Todos</label>
+                                </div>
+                            </div>
+                            <div className={styles.passwordBox}>
+                                <input 
+                                    type="checkbox" 
+                                    name="checkCommunityPassword" 
+                                    value="passwordRequired"
+                                    checked={selected}
+                                    onChange={handleCheckboxChange} 
+                                    className={styles.passwordCheck}/>
+                                <label htmlFor="communityPassword" className={styles.passwordTitle}>Exigir senha</label>
+                                <InputField type="text" variant='secondary' name='communityPassword'/>
+                            </div>
+                        </form>
+                    </div>
 
-                    <h1 className={styles.personalizarText}>Personalizar Banner:</h1>
+                    <div className={styles.bannerBox}>
+                        <h1 className={styles.personalizarText}>Personalizar Banner:</h1>
 
-                    <input
-                        type="file"
-                        onChange={handleImageChange}
-                        id="file-upload"
-                        className={styles.fileInput}
-                        accept="image/*"
-                        />
-                    <label htmlFor="file-upload" className={styles.fileUploadButton}> <img src={addIcon} alt="" />Escolher Imagem</label>
+                        <input
+                            type="file"
+                            onChange={handleImageChange}
+                            id="file-upload"
+                            className={styles.fileInput}
+                            accept="image/*"
+                            />
+                        <label htmlFor="file-upload" className={styles.fileUploadButton}> <img src={addIcon} alt="" />Escolher Imagem</label>
 
-                    {/* Exibindo a imagem carregada */}
-                    {imagem && (
-                        <div className={styles.previewContainer}>
-                            <img src={imagem} alt="Imagem carregada" className={styles.previewImage} />
-                        </div>
-                    )}
+                        {/* Exibindo a imagem carregada */}
+                        {imagem ? (
+                            <div className={styles.previewContainer}>
+                                <img src={imagem} alt="Imagem carregada" className={styles.previewImage} />
+                            </div>
+                        ) : (
+                            <div className={styles.skeleton}>Imagem não carregada</div>
+                        )}
+                    </div>
 
                     <button className={styles.buttonCreate} onClick={clickedCreate}>
                         Criar Comunidade
