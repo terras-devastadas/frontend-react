@@ -1,12 +1,13 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import styles from "./NavBar.module.css";
+import lasagneLogo from "../../assets/lasagneLogo.png";
 
 const NavBar = () => {
   return (
     <Navbar expand="sm" className={styles.navbar}>
       <Container>
         <Navbar.Brand href="/" className={styles["navbar-brand"]}>
-          <img alt="" src="src/assets/react.svg" width="30" height="30" className="d-inline-block align-top" /> LaSagne
+          <img alt="" src={lasagneLogo} width="30" height="30" className="d-inline-block align-top" /> <span>LaSagne</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

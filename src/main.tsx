@@ -9,6 +9,7 @@ import LoginPage from "./pages/Login/LoginPage.tsx";
 import RegistrationPage from "./pages/Registration/RegistrationPage.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import ExibirPerfil from "./pages/ExibirPerfil/ExibirPerfil.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "registration",
         element: <RegistrationPage />,
+      },
+      {
+        path: "exibir-perfil",
+        element: <ExibirPerfil />,
       },
     ],
   },

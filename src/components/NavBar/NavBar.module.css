@@ -1,17 +1,26 @@
 /* Personalizar a cor de fundo do Navbar */
 .navbar {
-  background-color: #4caf50 !important; /* Substitua pela cor desejada */
-  min-height: 10vh;
+    background-color: #18A75B;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    padding: 7px 0px;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; 
 }
 
 /* Personalizar o texto e links no Navbar */
 .navbar .navbar-brand {
   color: #ffffff !important; /* Cor do texto do título */
+  left: 50px;
+  margin-left: 40px;
 }
 
 .navbar .nav-link {
   color: #ffffff !important; /* Cor dos links */
   transition: color 0.3s ease;
+  margin-left: 5px;
 }
 
 .navbar .nav-link:hover {
@@ -25,4 +34,23 @@
 
 .navbar-toggler-icon {
   background-color: #ffffff; /* Ícone do toggle */
+}
+
+.navbar span {
+  color: #004420;
+  font-family: serif;
+  font-size: 2rem;
+  top: 4px;
+  position: absolute;
+  left: 70px;
+  display: flex;
+}
+
+.navbar img {
+  height: 50px;
+  width: auto;
+  align-items: center;
+  position: absolute;
+  top: 5px;
+  left: 20px;
 }
