@@ -7,7 +7,7 @@ import HomePage from "./pages/Home/HomePage.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import LoginPage from "./pages/Login/LoginPage.tsx";
 import RegistrationPage from "./pages/Registration/RegistrationPage.tsx";
-import CreateCommunity from "./pages/CreateCommunity/CreatyCommunity.tsx";
+import CreateCommunity from "./pages/CreateCommunity/CreateCommunity.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         element: <RegistrationPage />,
       },
       {
-        path: "create/community",
+        path: "createCommunity",
         element: <CreateCommunity />,
       },
     ],
