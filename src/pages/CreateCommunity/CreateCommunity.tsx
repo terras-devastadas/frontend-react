@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import api from '../../services/api'
 import { useNavigate } from "react-router-dom";
-import styles from '../CreateClassCommunity/createClassCommunityPage.module.css'
+import styles from '../CreateCommunity/createCommunity.module.css'
 import InputField from '../../components/InputField/InputField'
 import TextField from '../../components/TextField/TextField'
 import addIcon from '../../assets/addIcon.png'
