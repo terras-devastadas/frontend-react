@@ -8,24 +8,21 @@ import addIcon from '../../assets/addIcon.png'
 
 const CreateClassCommunityPageCopy = () => {
     const [selectedOption, setSelectedOption] = useState<string>('');
-    const [selected, setSelected] = useState(false);
     const [imagem, setImagem] = useState<string>('');
     const [communityName, setCommunityName] = useState<string>('');
     const [communityDescription, setCommunityDescription] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
     const navigate = useNavigate();
     const [allowed, setAllowed] = useState(false);
 
     const validateForm = () => {
         if (!communityName || !communityDescription) return false;
-        if (selected && !password) return false;
         if (selectedOption === '') return false;
         return true;
     };
 
     useEffect(() => {
         setAllowed(validateForm());
-    }, [communityName, communityDescription, selected, password, selectedOption]);
+    }, [communityName, communityDescription, selectedOption]);
 
     async function createClassCommunity() {
         if (!allowed) return;
@@ -34,8 +31,6 @@ const CreateClassCommunityPageCopy = () => {
                 communityName: communityName,
                 communityDescription: communityDescription,
                 visibility: selectedOption,
-                passwordRequired: selected,
-                password: password,
                 banner: imagem,
             })
 
@@ -45,10 +40,6 @@ const CreateClassCommunityPageCopy = () => {
             console.error("Erro na criação da comunidade:", error);
         }
     }
-
-    const handleCheckboxChange = () => {
-      setSelected(!selected);
-    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedOption(event.target.value);
@@ -92,14 +83,14 @@ const CreateClassCommunityPageCopy = () => {
                                 <div>
                                     <input
                                         type="radio"
-                                        id="Professores"
+                                        id="Alunos"
                                         name="option"
-                                        value="Professores"
-                                        checked={selectedOption === 'Professores'}
+                                        value="Alunos"
+                                        checked={selectedOption === 'Alunos'}
                                         onChange={handleChange}
                                         className={styles.none}
                                         />
-                                    <label htmlFor="Professores" className={styles.buttonProfessores}>Professores</label>
+                                    <label htmlFor="Alunos" className={styles.buttonAlunos}>Alunos</label>
                                 </div>
                                 <div>
                                     <input
@@ -113,17 +104,6 @@ const CreateClassCommunityPageCopy = () => {
                                         />
                                     <label htmlFor="todos" className={styles.buttonTodos}>Todos</label>
                                 </div>
-                            </div>
-                            <div className={styles.passwordBox}>
-                                <input 
-                                    type="checkbox" 
-                                    name="checkCommunityPassword" 
-                                    value="passwordRequired"
-                                    checked={selected}
-                                    onChange={handleCheckboxChange} 
-                                    className={styles.passwordCheck}/>
-                                <label htmlFor="communityPassword" className={styles.passwordTitle}>Exigir senha</label>
-                                <InputField type="text" variant='secondary' name='communityPassword' value={password} onChange={(e) => setPassword(e.target.value)}/>
                             </div>
                         </form>
                     </div>

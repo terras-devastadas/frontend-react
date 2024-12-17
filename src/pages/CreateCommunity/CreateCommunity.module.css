@@ -65,7 +65,7 @@
     margin-top: 10px;
 }
 
-.buttonProfessores, .buttonTodos {
+.buttonAlunos, .buttonTodos {
     width: 100px;
     padding: 5px 7px;
     background-color: #4dac79;
@@ -80,15 +80,15 @@
     margin: 0 10px; /* Add margin to create space between buttons */
 }
 
-.buttonProfessores{
+.buttonAlunos{
     width: 150px;
 }
 
-.buttonProfessores:hover, .buttonTodos:hover {
+.buttonAlunos:hover, .buttonTodos:hover {
     background-color: #196e41;
 }
 
-.buttonProfessores:enabled {
+.buttonAlunos:enabled {
     background-color: #196e41;
 }
 
@@ -96,47 +96,6 @@ input[type="radio"]:checked+label {
     background-color: #196e41;
     color: white;
     /* border-color: #196e41; */
-}
-
-.passwordBox {
-    display: flex;
-    margin-top: 10px;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-
-}
-.passwordTitle{
-    font-size: 18px;
-}
-
-.passwordCheck {
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #0B2548;
-    border-radius: 3px;
-    cursor: pointer;
-    position: relative;
-    outline: none;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.passwordCheck:checked {
-    background-color: #0B2548;
-    border-color: #0B2548;
-}
-
-.passwordCheck:checked::after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 6px;
-    width: 4px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
 }
 
 .none{
