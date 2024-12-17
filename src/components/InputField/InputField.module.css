@@ -9,13 +9,14 @@
 .InputArea {
     border-radius: 20px;
     border: none;
-    padding-left: 2px;
     padding-left: 15px;
+    padding-right: 10px;
     height: 35px;
 }
 
 .InputArea:focus{
     outline: none;
+    box-shadow: 1px 1px 5px #000;
 }
 
 .InputLabel{
@@ -23,4 +24,12 @@
     text-align: left;
     font-size: 20px;
     font-weight: bold;
+}
+
+.primary .InputArea{
+    width: 280px;
+}
+
+.secondary .InputArea{
+    width: 150px;
 }
