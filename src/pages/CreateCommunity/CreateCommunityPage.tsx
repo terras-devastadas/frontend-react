@@ -4,25 +4,28 @@ import { useNavigate } from "react-router-dom";
 import styles from "./CreateCommunityPage.module.css";
 import InputField from "../../components/InputField/InputField";
 import TextField from "../../components/TextField/TextField";
-import addIcon from "../../assets/AddIcon.png";
+import addIcon from "../../assets/addIcon.png";
 
-const CreateClassCommunityPageCopy = () => {
+const CreateCommunityPage = () => {
   const [selectedOption, setSelectedOption] = useState<string>("");
+  const [selected, setSelected] = useState(false);
   const [imagem, setImagem] = useState<string>("");
   const [communityName, setCommunityName] = useState<string>("");
   const [communityDescription, setCommunityDescription] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
   const [allowed, setAllowed] = useState(false);
 
   const validateForm = () => {
     if (!communityName || !communityDescription) return false;
+    if (selected && !password) return false;
     if (selectedOption === "") return false;
     return true;
   };
 
   useEffect(() => {
     setAllowed(validateForm());
-  }, [communityName, communityDescription, selectedOption]);
+  }, [communityName, communityDescription, selected, password, selectedOption]);
 
   async function createClassCommunity() {
     if (!allowed) return;
@@ -31,6 +34,8 @@ const CreateClassCommunityPageCopy = () => {
         communityName: communityName,
         communityDescription: communityDescription,
         visibility: selectedOption,
+        passwordRequired: selected,
+        password: password,
         banner: imagem,
       });
 
@@ -40,6 +45,10 @@ const CreateClassCommunityPageCopy = () => {
       console.error("Erro na criação da comunidade:", error);
     }
   }
+
+  const handleCheckboxChange = () => {
+    setSelected(!selected);
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
@@ -97,15 +106,15 @@ const CreateClassCommunityPageCopy = () => {
                 <div>
                   <input
                     type="radio"
-                    id="Alunos"
+                    id="Professores"
                     name="option"
-                    value="Alunos"
-                    checked={selectedOption === "Alunos"}
+                    value="Professores"
+                    checked={selectedOption === "Professores"}
                     onChange={handleChange}
                     className={styles.none}
                   />
-                  <label htmlFor="Alunos" className={styles.buttonAlunos}>
-                    Alunos
+                  <label htmlFor="Professores" className={styles.buttonProfessores}>
+                    Professores
                   </label>
                 </div>
                 <div>
@@ -122,6 +131,26 @@ const CreateClassCommunityPageCopy = () => {
                     Todos
                   </label>
                 </div>
+              </div>
+              <div className={styles.passwordBox}>
+                <input
+                  type="checkbox"
+                  name="checkCommunityPassword"
+                  value="passwordRequired"
+                  checked={selected}
+                  onChange={handleCheckboxChange}
+                  className={styles.passwordCheck}
+                />
+                <label htmlFor="communityPassword" className={styles.passwordTitle}>
+                  Exigir senha
+                </label>
+                <InputField
+                  type="text"
+                  variant="secondary"
+                  name="communityPassword"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
             </form>
           </div>
@@ -161,4 +190,4 @@ const CreateClassCommunityPageCopy = () => {
   );
 };
 
-export default CreateClassCommunityPageCopy;
+export default CreateCommunityPage;

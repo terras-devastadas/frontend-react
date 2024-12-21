@@ -11,7 +11,7 @@ import LoginPage from "./pages/Login/LoginPage.tsx";
 import RegistrationPage from "./pages/Registration/RegistrationPage.tsx";
 import ProfilePage from "./pages/Profile/ProfilePage.tsx";
 import PageProfile from "./pages/Profile/EditProfilePage.tsx";
-import CreateCommunity from "./pages/CreateCommunity/CreateCommunityPage.tsx";
+import CreateCommunityPage from "./pages/CreateCommunity/CreateCommunityPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "criar-comunidade",
-        element: <CreateCommunity />,
+        element: <CreateCommunityPage />,
       },
     ],
   },
