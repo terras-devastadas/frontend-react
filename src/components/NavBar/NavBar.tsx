@@ -25,6 +25,9 @@ const NavBar = () => {
             <Nav.Link href="/login" className={styles["nav-link"]}>
               Login
             </Nav.Link>
+            <Nav.Link href="/cadastro" className={styles["nav-link"]}>
+              Cadastro
+            </Nav.Link>
             <Nav.Link href="/perfil" className={styles["nav-link"]}>
               Perfil
             </Nav.Link>
