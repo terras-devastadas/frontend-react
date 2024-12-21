@@ -128,7 +128,7 @@
   text-decoration: underline;
 }
 
-button {
+.submitButton {
   width: 40%;
   padding: 12px;
   background-color: #A0B1C9;
@@ -141,7 +141,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.submitButton:hover {
   background-color: #133e79;
 }
 
