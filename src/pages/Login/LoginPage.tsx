@@ -69,18 +69,31 @@ function LoginPage() {
 
   return (
     <div className={styles.loginPage}>
-      <header className={styles.headerBar}>
-        <img className={styles.logoLasagne} src={lasagneLogo} alt="Lasagne Logo" />
-        <span>LaSagne</span>
-      </header>
-
       <div className={styles.bodyLogin}>
         <div className={styles.loginBox}>
           <h1 className={styles.titleLogin}>LOGIN</h1>
-          <InputField className={styles.usuario} htmlFor="username" label="Usuário:" ref={inputUsername} required />
-          <InputField className={styles.senha} type={passwordVisible ? "text" : "password"} htmlFor="password" label="Senha:" ref={inputPassword} />
+          <InputField
+            className={styles.usuario}
+            htmlFor="username"
+            label="Usuário:"
+            ref={inputUsername}
+            required
+          />
+          <InputField
+            className={styles.senha}
+            type={passwordVisible ? "text" : "password"}
+            htmlFor="password"
+            label="Senha:"
+            ref={inputPassword}
+          />
           <div className={styles.passwordWrapper}>
-            <img src={visible} alt="Toggle Password Visibility" className={styles.togglePassword} onClick={togglePasswordVisibility} style={{ cursor: "pointer" }} />
+            <img
+              src={visible}
+              alt="Toggle Password Visibility"
+              className={styles.togglePassword}
+              onClick={togglePasswordVisibility}
+              style={{ cursor: "pointer" }}
+            />
           </div>
 
           {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}

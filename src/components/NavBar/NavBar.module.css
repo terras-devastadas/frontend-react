@@ -1,13 +1,13 @@
 /* Personalizar a cor de fundo do Navbar */
 .navbar {
-    background-color: #18A75B;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-    padding: 7px 0px;
-    position: fixed; 
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000; 
+  background-color: #18a75b;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  padding: 7px 0px;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  margin-bottom: 3rem;
 }
 
 /* Personalizar o texto e links no Navbar */

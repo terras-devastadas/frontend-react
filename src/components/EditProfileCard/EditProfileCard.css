@@ -64,9 +64,9 @@
   color: white;
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 5px !important;
   margin-top: 10px;
-  margin-inline-start: 75%;
+  justify-self: center;
 }
 
 .btn.del:hover {

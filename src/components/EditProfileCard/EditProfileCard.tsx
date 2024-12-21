@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import "./CustomProfile.css"; // Importa o arquivo CSS específico do componente
+import "./EditProfileCard.css"; // Importa o arquivo CSS específico do componente
 
 type ButtonProps = {
   label: string;
@@ -17,12 +17,7 @@ interface UserProfile {
   onUpdateAvatar?: (file: File) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  label,
-  onClick,
-  type = "button",
-  className = "",
-}) => {
+const Button: React.FC<ButtonProps> = ({ label, onClick, type = "button", className = "" }) => {
   return (
     <button type={type} className={`btn ${className}`} onClick={onClick}>
       {label}
@@ -44,9 +39,7 @@ const Profile: React.FC<UserProfile> = ({
     avatarUrl,
   });
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setEditableProfile((prevProfile) => ({
       ...prevProfile,
@@ -55,7 +48,7 @@ const Profile: React.FC<UserProfile> = ({
   };
 
   const handleAvatarChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0] & onUpdateAvatar) {
+    if (event.target.files && event.target.files[0] && onUpdateAvatar) {
       onUpdateAvatar(event.target.files[0]);
     }
   };
@@ -66,11 +59,7 @@ const Profile: React.FC<UserProfile> = ({
 
   return (
     <div className="profile-container">
-      <img
-        src={avatarUrl}
-        alt={`${name}'s avatar`}
-        className="profile-avatar"
-      />
+      <img src={avatarUrl} alt={`${name}'s avatar`} className="profile-avatar" />
       <input
         type="file"
         accept="image/*"
