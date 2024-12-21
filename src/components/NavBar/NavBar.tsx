@@ -34,6 +34,9 @@ const NavBar = () => {
             <Nav.Link href="/editar-perfil" className={styles["nav-link"]}>
               Editar Perfil
             </Nav.Link>
+            <Nav.Link href="/criar-comunidade" className={styles["nav-link"]}>
+             Criar comunidade
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
