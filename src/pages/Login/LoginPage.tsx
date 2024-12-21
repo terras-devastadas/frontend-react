@@ -3,7 +3,6 @@ import styles from "./LoginPage.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../components/InputField/InputField";
 import api from "../../services/api";
-import lasagneLogo from "../../assets/lasagneLogo.png";
 import visible from "../../assets/visible.png";
 
 function LoginPage() {

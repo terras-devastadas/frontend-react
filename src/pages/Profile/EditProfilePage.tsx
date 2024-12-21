@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "../../assets/logo.png";
 import userIcon from "../../assets/joia.png";
 import "../../components/EditProfileCard/EditProfileCard.css";
 import { Button, Profile } from "../../components/EditProfileCard/EditProfileCard";
