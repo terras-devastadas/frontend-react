@@ -1,3 +1,7 @@
+.label{
+    font-size: 23px;
+}
+
 .fileInput {
     display: none;
 }
@@ -13,7 +17,7 @@
     font-size: 16px;
     cursor: pointer;
     border-radius: 15px;
-    margin-top: 10px;
+    margin-top: 13px;
     transition: background-color 0.3s ease;
 }
   
@@ -51,4 +55,21 @@
     font-size: 16px;
     margin-top: 10px;
 }
-  
+
+.primary .label{
+    font-size: 20px;
+    color: #0B2548;
+    text-align: left;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.primary .previewImage{
+    max-width: 230px;
+    max-height: 150px;
+}
+
+.primary .skeleton{
+    width: 230px;
+    height: 185px;
+}

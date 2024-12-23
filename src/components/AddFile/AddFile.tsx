@@ -5,9 +5,10 @@ import addIcon from "../../assets/addIcon.png";
 interface AddFileProps extends React.InputHTMLAttributes<HTMLInputElement> {
     variant?: 'primary' | 'secondary';
     label?: string;
+    onImageChange?: (image: string) => void;//
 }
 
-const AddFile: React.FC<AddFileProps> = ({variant, label}) => {
+const AddFile: React.FC<AddFileProps> = ({variant, label, onImageChange}) => {
     const [imagem, setImagem] = useState<string>("");
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +18,8 @@ const AddFile: React.FC<AddFileProps> = ({variant, label}) => {
         reader.onloadend = () => {
         if (typeof reader.result === "string") {
             setImagem(reader.result);
-        }
+            onImageChange?.(reader.result);//
+            }
         };
         reader.readAsDataURL(file);
     }
@@ -25,7 +27,7 @@ const AddFile: React.FC<AddFileProps> = ({variant, label}) => {
 
     return(
         <div className={`${styles.bannerBox} ${variant? styles[variant] : ''}`}>
-            <h1 className={styles.personalizarText}>{label}</h1>
+            <h1 className={styles.label}>{label}</h1>
 
             <input
                 type="file"

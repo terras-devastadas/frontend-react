@@ -1,0 +1,44 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    text-align: center;
+    border-radius: 20px;
+    padding: 20px 30px;
+    width: 750px;
+    color: #0b2548;
+    font-size: 20px;
+    background-color: #d9d9d9;
+}
+
+.content{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.submitButton{
+    align-self: flex-end;
+    background-color: #0b2548;
+    color: white;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    width: 120px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover{
+    opacity: 0.8;
+}
+
+.submitButton:active{
+    transform: scale(0.95);
+}
+
+.submitButton:disabled{
+    cursor: not-allowed;
+}
