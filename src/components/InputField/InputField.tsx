@@ -8,7 +8,7 @@ interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const InputField = forwardRef<HTMLInputElement ,InputFieldProps>(
-        ({variant = 'primary', htmlFor, label, type = "text", ...rest}, ref) => {
+        ({variant = '', htmlFor, label, type = "text", ...rest}, ref) => {
         return(
             <div className={`${styles.InputContainer} ${styles[variant]}`}>
                 <label className={styles.InputLabel} htmlFor={htmlFor}>{label}</label>
