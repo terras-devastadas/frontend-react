@@ -66,6 +66,7 @@
     line-height: 1.5;
     max-width: 460px;
     margin-right: auto;
+    width: 450px;
     text-align: left;
     overflow-y: auto;
     height: 400px;
@@ -78,7 +79,7 @@
 
 /* Tipo de usuário (Professor ou Aluno) */
 .teacherStudent {
-    margin-top: -380px;
+    margin-top: -410px;
     margin-left: 610px;
     position: absolute;
     font-weight: bold;
@@ -95,7 +96,7 @@
 /* Título de informações adicionais */
 .topicsTitle {
     font-size: 25px;
-    margin-top: -300px;
+    margin-top: -310px;
     line-height: 30px;
     margin-left: 490px;
     font-weight: bold;
@@ -115,28 +116,36 @@
     margin-top: 10px;
     color: #0B2548;
     text-align: left;
-    top: -4px;
+    top: -15px;
     left: 85px;
+    width: 350px;
+    border-radius: 25px;
+    border: 0px solid #A0B1C9;
+    padding: 6px;
 }
 
 .topicsMatricula {
     top: 55px;
     left: 130px;
+    
 }
 
 .topicsSemester {
-    top: 115px;
+    top: 105px;
     left: 200px;
+    width: 250px;
 }
 
 .topicsTheme {
-    top: 175px;
-    left: 215px;
+    top: 165px;
+    left: 210px;
+    width: 240px;
 }
 
 .topicsMeat {
-    top: 235px;
-    left: 285px;
+    top: 225px;
+    left: 280px;
+    width: 170px;
 }
 
 /* Linha vertical para separar as informações */
@@ -146,10 +155,11 @@
     display: flex;
     position: absolute !important;
     left: 500px;
-    margin-top: -410px;
+    margin-top: -440px;
 }
 
-.chatButton {
+.deleteButton,
+.enterButton {
     width: 70px;
     /* Defina o tamanho do botão */
     height: 70px;
@@ -170,14 +180,20 @@
     margin-left: 1120px;
 }
 
-.chatButton:hover {
+.deleteButton {
+    margin-top: 400px;
+}
+
+.deleteButton:hover,
+.enterButton:hover {
     transform: scale(1.1);
     /* Efeito de aumento no hover */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     /* Efeito de sombra */
 }
 
-.chatImg {
+.deleteImg,
+.enterImg {
     width: 40px;
     /* Tamanho da imagem dentro do botão */
     height: 40px;
