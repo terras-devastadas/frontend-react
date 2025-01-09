@@ -4,7 +4,7 @@ import api from "../../services/api";
 const HomePage = () => {
   useEffect(() => {
     const testIntegration = () => {
-      api.get("items/").then((response) => {
+      api.get("posts/").then((response) => {
         console.log(response);
       });
     };
