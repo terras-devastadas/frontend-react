@@ -37,6 +37,9 @@ const NavBar = () => {
             <Nav.Link href="/criar-comunidade" className={styles["nav-link"]}>
               Criar comunidade
             </Nav.Link>
+            <Nav.Link href="/criar-comunidade-professor" className={styles["nav-link"]}>
+              Criar comunidade professor
+            </Nav.Link>
             <Nav.Link href="/criar-post" className={styles["nav-link"]}>
               Criar post
             </Nav.Link>

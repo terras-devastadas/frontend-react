@@ -12,6 +12,7 @@ import RegistrationPage from "./pages/Registration/RegistrationPage.tsx";
 import ProfilePage from "./pages/Profile/ProfilePage.tsx";
 import PageProfile from "./pages/Profile/EditProfilePage.tsx";
 import CreateCommunityPage from "./pages/CreateCommunity/CreateCommunityPage.tsx";
+import CreateClassCommunityPage from "./pages/CreateClassCommunity/CreateClassCommunityPage.tsx";
 import CreatePostPage from "./pages/CreatePost/CreatePostPage.tsx";
 
 const router = createBrowserRouter([
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "criar-comunidade",
         element: <CreateCommunityPage />,
+      },
+      {
+        path: "criar-comunidade-professor",
+        element: <CreateClassCommunityPage />,
       },
       {
         path: "criar-post",
