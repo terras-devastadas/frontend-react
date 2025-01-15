@@ -1,7 +1,8 @@
 import styles from "./CreatePostPage.module.css";
 import InputField from "../../components/InputField/InputField";
 import TextField from "../../components/TextField/TextField";
-import AddFile from "../../components/AddFile/AddFile";
+// import AddFile from "../../components/AddFile/AddFile";
+import addIcon from "../../assets/addIcon.png";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +21,7 @@ const CreatePostPage = () => {
       const response = await api.post("/posts/", {
         title: title,
         content: content,
-        // image: imagem, //receber imagem do componente
+        image: imagem
       });
 
       console.log("Post criado com sucesso:", response.data);
@@ -64,10 +65,36 @@ const CreatePostPage = () => {
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-        <AddFile variant="primary" label="Imagem:" onChange={handleImageChange} />
+        {/* <AddFile variant="primary" label="Imagem:" onChange={handleImageChange} /> */}
+
+        <div className={styles.bannerBox}>
+            <h1 className={styles.personalizarText}>Personalizar Banner:</h1>
+
+            <input
+              type="file"
+              onChange={handleImageChange}
+              id="file-upload"
+              className={styles.fileInput}
+              accept="image/*"
+            />
+            <label htmlFor="file-upload" className={styles.fileUploadButton}>
+              {" "}
+              <img src={addIcon} alt="" />
+              Escolher Imagem
+            </label>
+
+            {/* Exibindo a imagem carregada */}
+            {imagem ? (
+              <div className={styles.previewContainer}>
+                <img src={imagem} alt="Imagem carregada" className={styles.previewImage} />
+              </div>
+            ) : (
+              <div className={styles.skeleton}>Imagem não carregada</div>
+            )}
+          </div>
       </div>
 
-      <button type="submit" className={styles.submitButton} onClick={handleClick}>
+      <button type="submit" className={styles.submitButton} onClick={handleClick} disabled={!title}>
         Criar Post
       </button>
     </div>

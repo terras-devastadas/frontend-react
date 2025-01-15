@@ -31,6 +31,73 @@
     transition: background-color 0.3s ease;
 }
 
+.bannerBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.personalizarText {
+    font-size: 20px;
+    font-weight: bold;
+    align-self: flex-start;
+}
+
+.fileInput {
+    display: none;
+}
+  
+.fileUploadButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #ffffff;
+    width: 230px;
+    color: #555555;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 15px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+.fileUploadButton img {
+    width: 25px;
+}
+  
+.fileUploadButton:hover {
+    opacity: 0.7;
+}
+  
+.previewContainer {
+    text-align: center;
+    margin-top: 0;
+    width: 100%;
+    margin-top: 10px;
+}
+  
+.previewImage {
+    max-width: 270px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+  
+.skeleton {
+    background-color: #b1b1b183;
+    border-radius: 10px;
+    width: 230px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555555;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
 .submitButton:hover{
     opacity: 0.8;
 }
