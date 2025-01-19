@@ -30,7 +30,7 @@ const CreateClassCommunityPage = () => {
   async function createClassCommunity() {
     if (!allowed) return;
     try {
-      const response = await api.post("/createClassCommunity/", {
+      const response = await api.post("/communities/", {
         communityName: communityName,
         communityDescription: communityDescription,
         visibility: selectedOption,
