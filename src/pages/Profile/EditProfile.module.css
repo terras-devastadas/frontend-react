@@ -1,6 +1,4 @@
-/* ExibirPerfil.module.css */
 
-/* Container principal */
 .exibirPage {
     display: flex;
     justify-content: center;
@@ -11,7 +9,6 @@
     color: #0B2548;
 }
 
-/* Corpo principal */
 .bodyExibir {
     width: 15000px;
     height: 10px;
@@ -20,13 +17,11 @@
     align-items: center;
 }
 
-/* Caixa do conteúdo do perfil */
+
 .exibirBox {
     margin-top: -50px;
     width: 1000px;
-    /* Ajustado para o layout */
     height: 700px;
-    /* Ajustado para mais espaço */
     padding: 30px;
     background-color: #D9D9D9;
     border-radius: 25px;
@@ -35,7 +30,6 @@
     position: relative;
 }
 
-/* Imagem do ícone do usuário */
 .userIcon {
     width: 100px;
     height: 100px;
@@ -44,14 +38,12 @@
     margin-bottom: 20px;
 }
 
-/* Nome de usuário */
 .username {
     font-size: 28px;
     font-weight: bold;
     margin: 10px 0;
 }
 
-/* Nome do usuário em formato @ */
 .userAt {
     font-size: 20px;
     color: #0B2548;
@@ -59,7 +51,6 @@
     opacity: 60%;
 }
 
-/* Descrição do usuário */
 .description {
     font-size: 20px;
     margin-top: 10px;
@@ -77,7 +68,6 @@
     color: #0B2548;
 }
 
-/* Tipo de usuário (Professor ou Aluno) */
 .teacherStudent {
     margin-top: -410px;
     margin-left: 610px;
@@ -93,7 +83,6 @@
     font-weight: bold;
 }
 
-/* Título de informações adicionais */
 .topicsTitle {
     font-size: 25px;
     margin-top: -310px;
@@ -104,7 +93,6 @@
     position: absolute;
 }
 
-/* Informações de curso, matrícula, semestre, etc. */
 .topicsCourse,
 .topicsMatricula,
 .topicsSemester,
@@ -148,7 +136,6 @@
     width: 170px;
 }
 
-/* Linha vertical para separar as informações */
 .linhaVert {
     height: 420px;
     border-right: 2px solid #0B2548;
@@ -161,14 +148,11 @@
 .deleteButton,
 .enterButton {
     width: 70px;
-    /* Defina o tamanho do botão */
     height: 70px;
     border-radius: 100%;
-    /* Torna o botão circular */
     padding: 0;
     border: none;
     background-color: #0B2548;
-    /* Cor de fundo opcional */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -187,16 +171,134 @@
 .deleteButton:hover,
 .enterButton:hover {
     transform: scale(1.1);
-    /* Efeito de aumento no hover */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* Efeito de sombra */
 }
 
 .deleteImg,
 .enterImg {
     width: 40px;
-    /* Tamanho da imagem dentro do botão */
     height: 40px;
     border-radius: 50%;
-    /* Caso a imagem não seja redonda, você pode fazer ela redonda também */
+}
+
+.exibirPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #A0B1C9;
+    padding-top: 0px;
+    color: #0B2548;
+}
+
+.bodyExibir {
+    width: 15000px;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.exibirBox {
+    margin-top: -50px;
+    width: 1000px;
+    height: auto;
+    padding: 30px;
+    background-color: #D9D9D9;
+    border-radius: 25px;
+    text-align: center;
+    border: 3px solid #0B2548;
+    position: relative;
+}
+
+.userIcon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.profileImageContainer {
+    display: inline-block;
+    position: relative;
+}
+
+.username {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.usernameBox {
+    margin-top: 15px;
+    position: relative;
+    margin-top: -10px;
+    
+}
+
+.usernameInputWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.usernameInput {
+    width: 300px;
+    padding: 10px;
+    margin-top: 10px;
+    color: #0B2548;
+    text-align: left;
+    border-radius: 25px;
+    border: 0px solid #A0B1C9;
+}
+
+.saveUsernameButton {
+    background-color: #4dac79;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.editUsernameButton {
+    background-color: transparent;
+    border: none;
+    color: #0B2548;
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.description {
+    font-size: 20px;
+    margin-top: 10px;
+    line-height: 1.5;
+    max-width: 460px;
+    margin-right: auto;
+    width: 450px;
+    text-align: left;
+    overflow-y: auto;
+    height: 400px;
+    padding-top: 10px;
+    resize: none;
+    border-radius: 25px;
+    padding: 12px;
+    color: #0B2548;
+}
+
+.userAt {
+    font-size: 20px;
+    color: #0B2548;
+    margin-top: 10px;
+    opacity: 60%;
+}
+
+.fileInput {
+    display: none;
 }

@@ -3,7 +3,7 @@ import reactIcon from "../../assets/react.svg";
 import chatBubble from "../../assets/chat_bubble.png";
 import deleteButton from "../../assets/DeleteButton.png";
 import enterButton from "../../assets/EnterButton.png";
-import TextField from "../../components/TextField/TextField"
+import TextField from "../../components/TextField/TextField";
 import InputField from "../../components/InputField/InputField";
 import { useState } from "react";
 
@@ -11,22 +11,83 @@ const EditProfilePage = () => {
   const test = () => console.log("Hello World!");
 
   const [profileDescription, setProfileDescription] = useState<string>("");
-
   const [courseName, setCourseName] = useState<string>("");
-
   const [semesterName, setSemesterName] = useState<string>("");
-
   const [themeName, setThemeName] = useState<string>("");
-
   const [meatName, setMeatName] = useState<string>("");
+  const [username, setUsername] = useState<string>("Nome do usuário");
+  const [profileImage, setProfileImage] = useState<string>("");
+  const [isEditingUsername, setIsEditingUsername] = useState<boolean>(false);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (typeof reader.result === "string") {
+          setProfileImage(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <div className={styles.exibirPage}>
       <div className={styles.bodyExibir}>
         <div className={styles.exibirBox}>
-          <img src={reactIcon} alt="Foto de Perfil" className={styles.userIcon} />
-          <h1 className={styles.username}>Nome do usuário</h1>
+          <div
+            className={styles.profileImageContainer}
+            onClick={() => document.getElementById('file-upload-profile')?.click()}
+          >
+            <img
+              src={profileImage || reactIcon}
+              alt="Foto de Perfil"
+              className={styles.userIcon}
+            />
+            <input
+              type="file"
+              onChange={handleImageChange}
+              id="file-upload-profile"
+              className={styles.fileInput}
+              accept="image/*"
+              style={{ display: 'none' }}
+            />
+          </div>
+
+
+          <div className={styles.usernameBox}>
+            {isEditingUsername ? (
+              <div className={styles.usernameInputWrapper}>
+                <InputField
+                  variant="primary"
+                  label="Nome do Usuário"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className={styles.usernameInput}
+                />
+                <button
+                  onClick={() => setIsEditingUsername(false)}
+                  className={styles.saveUsernameButton}
+                >
+                  Salvar
+                </button>
+              </div>
+            ) : (
+              <>
+                <h1 className={styles.username}>{username}</h1>
+                <button 
+                  onClick={() => setIsEditingUsername(true)} 
+                  className={styles.editUsernameButton}
+                >
+                  Editar
+                </button>
+              </>
+            )}
+          </div>
+
           <h1 className={styles.userAt}>@username</h1>
+
           <TextField
             variant="primary"
             className={styles.description}
@@ -36,18 +97,22 @@ const EditProfilePage = () => {
             onChange={(e) => setProfileDescription(e.target.value)}
             required
           />
+
           <div className={styles.teacherStudent}>
             <span>Professor/Aluno</span>
           </div>
           <div className={styles.topicsTitle}>
-            Curso:<br></br>
-            <br></br>
-            Matrícula: 28903223<br></br>
-            <br></br>
-            Semestre Atual:<br></br>
-            <br></br>
-            Matéria Favorita:<br></br>
-            <br></br>
+            Curso:<br />
+            <br />
+            Matrícula: 28903223
+            <br />
+            <br />
+            Semestre Atual:
+            <br />
+            <br />
+            Matéria Favorita:
+            <br />
+            <br />
             Comida do RU favorita:
             <InputField
               variant="primary"
@@ -92,6 +157,7 @@ const EditProfilePage = () => {
           <div className={styles.linhaVert}></div>
         </div>
       </div>
+
       <button className={styles.deleteButton} onClick={test}>
         <img src={deleteButton} alt="Botão de Deletar Conta" className={styles.deleteImg} />
       </button>
