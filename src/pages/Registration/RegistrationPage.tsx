@@ -23,8 +23,8 @@ const RegistrationPage = () => {
     }
 
     await api.post("/users/", {
-      firstName: inputName.current?.value,
-      lastName: inputLastName.current?.value,
+      first_name: inputName.current?.value,
+      last_name: inputLastName.current?.value,
       username: inputUsername.current?.value,
       email: inputEmail.current?.value,
       password: inputPassword1.current?.value,
