@@ -14,6 +14,7 @@ import PageProfile from "./pages/Profile/EditProfilePage.tsx";
 import CreateCommunityPage from "./pages/CreateCommunity/CreateCommunityPage.tsx";
 import CreateClassCommunityPage from "./pages/CreateClassCommunity/CreateClassCommunityPage.tsx";
 import CreatePostPage from "./pages/CreatePost/CreatePostPage.tsx";
+import SearchPage from "./pages/SearchBar/SearchBar.tsx";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
         path: "criar-post",
         element: <CreatePostPage />,
       },
+      {
+        path: "search",
+        element: <SearchPage />,
+      }
     ],
   },
 ]);
