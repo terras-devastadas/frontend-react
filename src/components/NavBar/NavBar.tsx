@@ -43,6 +43,9 @@ const NavBar = () => {
             <Nav.Link href="/criar-post" className={styles["nav-link"]}>
               Criar post
             </Nav.Link>
+            <Nav.Link href="/comunidade" className={styles["nav-link"]}>
+              Comunidade
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
