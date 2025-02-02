@@ -5,7 +5,8 @@ import deleteButton from "../../assets/DeleteButton.png";
 import enterButton from "../../assets/EnterButton.png";
 import TextField from "../../components/TextField/TextField";
 import InputField from "../../components/InputField/InputField";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import api from "../../services/api";
 
 const EditProfilePage = () => {
   const test = () => console.log("Hello World!");
@@ -16,7 +17,7 @@ const EditProfilePage = () => {
   const [themeName, setThemeName] = useState<string>("");
   const [meatName, setMeatName] = useState<string>("");
   const [username, setUsername] = useState<string>("Nome do usuário");
-  const [profileImage, setProfileImage] = useState<string>("");
+  const [photo_profile, setProfileImage] = useState<string>("");
   const [isEditingUsername, setIsEditingUsername] = useState<boolean>(false);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +33,45 @@ const EditProfilePage = () => {
     }
   };
 
+  useEffect(() => {
+    // Exemplo de requisição GET
+    api.get('/info')
+      .then(response => {
+        const data = response.data;
+        setProfileDescription(data.bio);
+        setCourseName(data.courseName);
+        setSemesterName(data.semesterName);
+        setThemeName(data.themeName);
+        setMeatName(data.meatName);
+        setUsername(data.username);
+        setProfileImage(`${api.defaults.baseURL}${data.photo_profile}`);
+      })
+      .catch(error => {
+        console.error('Erro ao buscar perfil:', error);
+      });
+  }, []);
+
+  const handleSaveProfile = () => {
+    // Exemplo de requisição POST
+    const profileData = {
+      profileDescription,
+      courseName,
+      semesterName,
+      themeName,
+      meatName,
+      username,
+      photo_profile,  
+    };
+
+    api.post('/info/', profileData)
+      .then(response => {
+        console.log('Perfil salvo com sucesso:', response.data);
+      })
+      .catch(error => {
+        console.error('Erro ao salvar perfil:', error);
+      });
+  };
+
   return (
     <div className={styles.exibirPage}>
       <div className={styles.bodyExibir}>
@@ -41,7 +81,7 @@ const EditProfilePage = () => {
             onClick={() => document.getElementById('file-upload-profile')?.click()}
           >
             <img
-              src={profileImage || reactIcon}
+              src={photo_profile || reactIcon}
               alt="Foto de Perfil"
               className={styles.userIcon}
             />
@@ -162,7 +202,7 @@ const EditProfilePage = () => {
         <img src={deleteButton} alt="Botão de Deletar Conta" className={styles.deleteImg} />
       </button>
 
-      <button className={styles.enterButton} onClick={test}>
+      <button className={styles.enterButton} onClick={handleSaveProfile}>
         <img src={enterButton} alt="Botão de Enter" className={styles.enterImg} />
       </button>
     </div>
