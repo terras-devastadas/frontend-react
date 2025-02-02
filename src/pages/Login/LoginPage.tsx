@@ -14,11 +14,11 @@ function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    api.post("logout/").then((response) => {
-      console.log(response);
-    });
-  }, []);
+  // useEffect(() => {
+  //   api.post("logout/").then((response) => {
+  //     console.log(response);
+  //   });
+  // }, []);
 
   // Função para alternar visibilidade da senha
   const togglePasswordVisibility = () => {
@@ -38,6 +38,8 @@ function LoginPage() {
     setLoading(true);
     setErrorMessage("");
 
+    sessionStorage.clear(); // Removendo Token e user
+
     try {
       const response = await api.post("/login/", {
         username,
@@ -45,16 +47,11 @@ function LoginPage() {
       });
 
       if (response.status === 200) {
+        const userResponse = await api.get("/users/");
+        sessionStorage.setItem("Token", response.data.token);
+        sessionStorage.setItem("User", userResponse.data);
         navigate("/");
-        localStorage.setItem("Token", response.data.token);
-        localStorage.setItem("User", JSON.stringify(response.data.user));
-
-        // exemplo pra pegar o user
-        const userString = localStorage.getItem("User");
-        if (userString) {
-          const user = JSON.parse(userString);
-          console.log(`Bem vindo ${user.first_name}`);
-        }
+        
       } else {
         setErrorMessage("Usuário ou senha incorretos.");
       }

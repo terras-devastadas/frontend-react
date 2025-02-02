@@ -5,26 +5,33 @@ import styles from "./HomePage.module.css";
 
 const HomePage = () => {
   const[posts, setPosts] = useState<any>()
-
+  const token = sessionStorage.getItem("Token");
+  
   useEffect(() => {
-    async function getPosts() {
-      try{
-        const response = await api.get("/posts/")
-        // console.log(response.data)
-        setPosts(response.data)
+    if (token){
+      async function getPosts() {
+        try{
+          const response = await api.get("/posts/")
+          //console.log(response.data)
+          setPosts(response.data)
 
-      } catch (error) {
-        console.error("Erro ao buscar posts:", error);
+        } catch (error) {
+          console.error("Erro ao buscar posts:", error);
+        }
       }
+      getPosts();
     }
-    getPosts();
   }, []);
 
   // O usuário precisa estar logado para acessar essa página
   // Verificar se o token está presente no localStorage
-  if(!posts) {
-    return <div>Carregando...</div>
-  }
+
+    if(token == null) { 
+        return <div>Você precisa estar logado para acessar essa página</div>
+    }else if(!posts) {
+        return <div>Carregando...</div>
+    }
+
 
   return (
     <>
