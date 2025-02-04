@@ -6,6 +6,8 @@ import InputField from "../../components/InputField/InputField";
 import TextField from "../../components/TextField/TextField";
 import addIcon from "../../assets/addIcon.png";
 
+
+
 const CreateCommunityPage = () => {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [imagem, setImagem] = useState<string>("");
@@ -13,6 +15,22 @@ const CreateCommunityPage = () => {
   const [communityDescription, setCommunityDescription] = useState<string>("");
   const navigate = useNavigate();
   const [allowed, setAllowed] = useState(false);
+  const [username,  setUsername] = useState<any>({})
+  const [profilePic, setProfilePic] = useState<any>({})
+
+  useEffect(() => {  
+    async function getUser(){
+      try{
+        const response = await api.get('/info/')
+        setUsername(response.data.username)
+        setProfilePic(response.data.photo_profile)
+      }catch(error){
+        console.error("Erro ao buscar dados do perfil:", error)
+      }
+    }
+
+    getUser()
+  }, []);
 
   const validateForm = () => {
     if (!communityName || !communityDescription) return false;
@@ -32,6 +50,8 @@ const CreateCommunityPage = () => {
         communityDescription: communityDescription,
         visibility: selectedOption,
         banner: imagem,
+        author: username,
+        image: profilePic,
       });
 
       console.log("Comunidade criada com sucesso:", response.data);
