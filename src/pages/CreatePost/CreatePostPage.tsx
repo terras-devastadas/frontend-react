@@ -4,7 +4,7 @@ import TextField from "../../components/TextField/TextField";
 // import AddFile from "../../components/AddFile/AddFile";
 import addIcon from "../../assets/addIcon.png";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 
@@ -13,15 +13,34 @@ const CreatePostPage = () => {
   const [content, setContent] = useState<string>("");
   const navigate = useNavigate();
   const [imagem, setImagem] = useState<string>("");
+  const [username,  setUsername] = useState<any>({})
+  const [profilePhoto, setProfilePhoto] = useState<string>("");
+
+  useEffect(() => {  
+    async function getUser(){
+      try{
+        const response = await api.get('/info/')
+        setUsername(response.data.username)
+        setProfilePhoto(response.data.photo_profile)
+      }catch(error){
+        console.error("Erro ao buscar dados do perfil:", error)
+      }
+    }
+
+    getUser()
+  }, []);
 
   async function createPost() {
-    if (!title) return; //adicionar disabled no botão
+    if (!title) return; 
 
     try {
       const response = await api.post("/posts/", {
         title: title,
         content: content,
-        image: imagem
+        image: imagem,
+        author: username,
+        profilePhoto: profilePhoto,
+        communityId: 1,//Implementar isso
       });
 
       console.log("Post criado com sucesso:", response.data);
@@ -65,7 +84,6 @@ const CreatePostPage = () => {
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-        {/* <AddFile variant="primary" label="Imagem:" onChange={handleImageChange} /> */}
 
         <div className={styles.bannerBox}>
             <h1 className={styles.personalizarText}>Personalizar Banner:</h1>
