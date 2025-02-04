@@ -15,6 +15,20 @@ const CreateClassCommunityPage = () => {
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
   const [allowed, setAllowed] = useState(false);
+  const [username,  setUsername] = useState<any>({})
+
+  useEffect(() => {  
+    async function getUser(){
+      try{
+        const response = await api.get('/info/')
+        setUsername(response.data.username)
+      }catch(error){
+        console.error("Erro ao buscar dados do perfil:", error)
+      }
+    }
+
+    getUser()
+  }, []);
 
   const validateForm = () => {
     if (!communityName || !communityDescription) return false;
@@ -37,6 +51,7 @@ const CreateClassCommunityPage = () => {
         passwordRequired: selected,
         password: password,
         banner: imagem,
+        author: username,
       });
 
       console.log("Comunidade criada com sucesso:", response.data);
