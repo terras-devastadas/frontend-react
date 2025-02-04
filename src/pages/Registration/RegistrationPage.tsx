@@ -21,6 +21,7 @@ const RegistrationPage = () => {
       console.error("Senhas devem ser diferentes");
       return;
     }
+    sessionStorage.clear();
 
     await api.post("/users/", {
       first_name: inputName.current?.value,
