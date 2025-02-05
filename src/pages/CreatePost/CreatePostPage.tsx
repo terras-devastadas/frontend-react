@@ -13,15 +13,13 @@ const CreatePostPage = () => {
   const [content, setContent] = useState<string>("");
   const navigate = useNavigate();
   const [imagem, setImagem] = useState<string>("");
-  const [username,  setUsername] = useState<any>({})
-  const [profilePhoto, setProfilePhoto] = useState<string>("");
+  const [userId,  setUserId] = useState<any>({})
 
   useEffect(() => {  
     async function getUser(){
       try{
         const response = await api.get('/info/')
-        setUsername(response.data.username)
-        setProfilePhoto(response.data.photo_profile)
+        setUserId(response.data.id)
       }catch(error){
         console.error("Erro ao buscar dados do perfil:", error)
       }
@@ -38,9 +36,8 @@ const CreatePostPage = () => {
         title: title,
         content: content,
         image: imagem,
-        author: username,
-        profilePhoto: profilePhoto,
-        communityId: 1,//Implementar isso
+        userId: userId,
+        community: 1,//Implementar isso
       });
 
       console.log("Post criado com sucesso:", response.data);
