@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         element: <CreatePostPage />,
       },
       {
-        path: "comunidade",
+        path: "comunidade/:id",
         element: <CommunityPage />,
       },
     ],
