@@ -12,15 +12,31 @@
 }
 
 .title{
-    margin-bottom: 10px;
     font-size: 1.5rem;
     font-weight: 600;
+    margin-bottom: 10px;
+    min-width: 0;
+    overflow-wrap: break-word; 
+}
+
+.containerTitle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    word-break: normal;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 87%; 
+    flex: 1 1 0;
 }
 
 .content{
     margin-bottom: 10px;
     font-size: 1rem;
-    word-break: break-all;
+    text-align: justify;
+    word-break: normal;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 .image{
@@ -28,4 +44,32 @@
     max-height: 150px;
     object-fit: cover;
     border-radius: 10px;
+}
+
+.infoUser{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    gap: 15px;
+    max-width: 100%;
+}
+
+.userPhotoContainer{
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-start;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    background-color: #CCE1FF;
+}
+
+.userPhoto{
+    max-width: 90px;
+    max-height: 90px;
 }
