@@ -4,19 +4,21 @@ import reactIcon from "../../assets/react.svg";
 import chatBubble from "../../assets/chat_bubble.png";
 import api from "../../services/api";
 
-  const ProfilePage = ({}) => {
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
+const ProfilePage = ({}) => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-    const [userData, setUserData] = useState({
-      userType: null,
-      course: null,
-      registration: null,
-      currentSemester: null,
-      favoriteSubject: null,
-      favoriteFood: null,
-      photo_profile: null,
-    });
+  const [userData, setUserData] = useState({
+    userType: null,
+    course: null,
+    registration: null,
+    currentSemester: null,
+    favoriteSubject: null,
+    favoriteFood: null,
+    photo_profile: null,
+    firstName: null, // Novo campo para o nome do usuário
+    username: null, // Novo campo para o @username
+  });
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -32,6 +34,8 @@ import api from "../../services/api";
           favoriteSubject: data.subject, // Matéria favorita
           favoriteFood: data.food, // Comida favorita do RU
           photo_profile: data.photo_profile, // Foto de perfil
+          name: data.firstName, // Nome do usuário
+          username: data.username, // @username
         });
       } catch (error) {
         console.error("Erro ao buscar dados", error);
@@ -42,7 +46,7 @@ import api from "../../services/api";
     };
 
     fetchUserData();
-  },[] );
+  }, []);
 
   const test = () => console.log("Hello World!");
 
@@ -59,8 +63,8 @@ import api from "../../services/api";
       <div className={styles.bodyExibir}>
         <div className={styles.exibirBox}>
           <img src={userData.photo_profile || reactIcon} alt="Foto de Perfil" className={styles.userIcon} />
-          <h1 className={styles.username}>Nome do usuário</h1>
-          <h1 className={styles.userAt}>@username</h1>
+          <h1 className={styles.username}>{userData.firstName}</h1> {/* Nome do usuário */}
+          <h1 className={styles.userAt}>@{userData.username}</h1> {/* @username */}
           <h1 className={styles.description}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quod dolorem repellat quos
             labore. Laudantium vitae, blanditiis qui saepe, et harum nesciunt laboriosam maxime,

@@ -14,13 +14,14 @@ const EditProfilePage = () => {
   const [semesterName, setSemesterName] = useState("");
   const [themeName, setThemeName] = useState("");
   const [meatName, setMeatName] = useState("");
-  const [username, setUsername] = useState("Nome do usuário");
+  const [firstName, setFirstName] = useState("Nome do usuário"); // Renomeado para firstName
+  const [username, setUsername] = useState("@username"); // Renomeado para username
   const [photo_profile, setProfileImage] = useState("");
-  const [isEditingUsername, setIsEditingUsername] = useState(false);
+  const [isEditingFirstName, setIsEditingFirstName] = useState(false); // Renomeado para isEditingFirstName
   const [userType, setUserType] = useState(""); // Novo estado para "Professor/Aluno"
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [registrarion, setRegistration] = useState("");
+  const [registration, setRegistration] = useState("");
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -33,8 +34,9 @@ const EditProfilePage = () => {
         setCourseName(data.course || "");
         setSemesterName(data.semester || "");
         setThemeName(data.subject || "");
-        setMeatName(data.food|| "");
-        setUsername(data.username || "Nome do usuário");
+        setMeatName(data.food || "");
+        setFirstName(data.firstName || "Nome do usuário"); // Nome do usuário (firstName)
+        setUsername(data.username ? `@${data.username}` : "@username"); // @username
         setProfileImage(data.photo_profile);
         setUserType(data.is_staff || ""); // Define o tipo de usuário
         setRegistration(data.matricula || "");
@@ -64,15 +66,13 @@ const EditProfilePage = () => {
 
   const handleSaveProfile = () => {
     const profileData = {
-      
-      subject:themeName,
-      food:meatName,
-      username,
+      subject: themeName,
+      food: meatName,
+      username: username.replace("@", ""), // Remove o "@" antes de enviar
       bio,
       course: courseName,
       semester: semesterName,
       photo_profile,
-  
     };
 
     // Exemplo de requisição POST para salvar o perfil
@@ -117,17 +117,17 @@ const EditProfilePage = () => {
           </div>
 
           <div className={styles.usernameBox}>
-            {isEditingUsername ? (
+            {isEditingFirstName ? (
               <div className={styles.usernameInputWrapper}>
                 <InputField
                   variant="primary"
                   label="Nome do Usuário"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   className={styles.usernameInput}
                 />
                 <button
-                  onClick={() => setIsEditingUsername(false)}
+                  onClick={() => setIsEditingFirstName(false)}
                   className={styles.saveUsernameButton}
                 >
                   Salvar
@@ -135,9 +135,9 @@ const EditProfilePage = () => {
               </div>
             ) : (
               <>
-                <h1 className={styles.username}>{username}</h1>
+                <h1 className={styles.username}>{firstName}</h1> {/* Exibe o firstName */}
                 <button 
-                  onClick={() => setIsEditingUsername(true)} 
+                  onClick={() => setIsEditingFirstName(true)} 
                   className={styles.editUsernameButton}
                 >
                   Editar
@@ -146,7 +146,7 @@ const EditProfilePage = () => {
             )}
           </div>
 
-          <h1 className={styles.userAt}>@username</h1>
+          <h1 className={styles.userAt}>{username}</h1> {/* Exibe o username */}
 
           <TextField
             variant="primary"
@@ -175,9 +175,7 @@ const EditProfilePage = () => {
             />
             <br />
 
-            Matrícula: {registrarion}
-            
-            
+            Matrícula: {registration}
             <br />
             <br />
             Semestre Atual:
