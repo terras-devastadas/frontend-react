@@ -8,7 +8,7 @@ import InputField from "../../components/InputField/InputField";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 
-const EditProfilePage = ({ apiUrl }) => {
+const EditProfilePage = () => {
   const [bio, setBio] = useState("");
   const [courseName, setCourseName] = useState("");
   const [semesterName, setSemesterName] = useState("");
@@ -19,34 +19,35 @@ const EditProfilePage = ({ apiUrl }) => {
   const [isEditingUsername, setIsEditingUsername] = useState(false);
   const [userType, setUserType] = useState(""); // Novo estado para "Professor/Aluno"
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
+  const [registrarion, setRegistration] = useState("");
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error('Erro ao buscar dados');
-        }
-        const data = await response.json();
+        const response = await api.get('/info/');
+
+        const data = response.data;
         // Preenche os estados com os dados da API
         setBio(data.bio || "");
-        setCourseName(data.courseName || "");
-        setSemesterName(data.semesterName || "");
-        setThemeName(data.themeName || "");
-        setMeatName(data.meatName || "");
+        setCourseName(data.course || "");
+        setSemesterName(data.semester || "");
+        setThemeName(data.subject || "");
+        setMeatName(data.food|| "");
         setUsername(data.username || "Nome do usuário");
-        setProfileImage(data.photo_profile || reactIcon);
-        setUserType(data.userType || ""); // Define o tipo de usuário
+        setProfileImage(data.photo_profile);
+        setUserType(data.is_staff || ""); // Define o tipo de usuário
+        setRegistration(data.matricula || "");
       } catch (error) {
-        setError(error.message);
+        setError('NUM deu');
+        console.error('Erro ao buscar dados', error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchUserData();
-  }, [apiUrl]);
+  }, []);
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
@@ -63,14 +64,15 @@ const EditProfilePage = ({ apiUrl }) => {
 
   const handleSaveProfile = () => {
     const profileData = {
-      bio,
-      courseName,
-      semesterName,
-      themeName,
-      meatName,
+      
+      subject:themeName,
+      food:meatName,
       username,
+      bio,
+      course: courseName,
+      semester: semesterName,
       photo_profile,
-      userType, // Inclui o tipo de usuário
+  
     };
 
     // Exemplo de requisição POST para salvar o perfil
@@ -152,12 +154,12 @@ const EditProfilePage = ({ apiUrl }) => {
             htmlFor="description"
             label="Descrição:"
             value={bio}
-            onChange={(e) => setbio(e.target.value)}
+            onChange={(e) => setBio(e.target.value)}
             required
           />
 
           <div className={styles.teacherStudent}>
-            <span>{userType}</span> {/* Exibe o tipo de usuário */}
+            <span>{userType ? "Professor" : "Aluno"}</span> {/* Exibe o tipo de usuário */}
           </div>
 
           <div className={styles.topicsTitle}>
@@ -172,7 +174,10 @@ const EditProfilePage = ({ apiUrl }) => {
               required
             />
             <br />
-            Matrícula: 28903223
+
+            Matrícula: {registrarion}
+            
+            
             <br />
             <br />
             Semestre Atual:

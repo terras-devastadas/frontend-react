@@ -2,44 +2,47 @@ import React, { useState, useEffect } from 'react';
 import styles from "./ProfilePage.module.css";
 import reactIcon from "../../assets/react.svg";
 import chatBubble from "../../assets/chat_bubble.png";
+import api from "../../services/api";
 
-const ProfilePage = ({ apiUrl }) => {
-  const [userData, setUserData] = useState({
-    userType: null,
-    course: null,
-    registration: null,
-    currentSemester: null,
-    favoriteSubject: null,
-    favoriteFood: null,
-  });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const ProfilePage = ({}) => {
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+
+    const [userData, setUserData] = useState({
+      userType: null,
+      course: null,
+      registration: null,
+      currentSemester: null,
+      favoriteSubject: null,
+      favoriteFood: null,
+      photo_profile: null,
+    });
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error('Erro ao buscar dados');
-        }
-        const data = await response.json();
+        const response = await api.get('/info/');
+
+        const data = response.data;
         setUserData({
-          userType: data.userType, // "Professor" ou "Aluno"
+          userType: data.is_staff, // "Professor" ou "Aluno"
           course: data.course, // Curso do usuário
-          registration: data.registration, // Matrícula
-          currentSemester: data.currentSemester, // Semestre atual
-          favoriteSubject: data.favoriteSubject, // Matéria favorita
-          favoriteFood: data.favoriteFood, // Comida favorita do RU
+          registration: data.matricula, // Matrícula
+          currentSemester: data.semester, // Semestre atual
+          favoriteSubject: data.subject, // Matéria favorita
+          favoriteFood: data.food, // Comida favorita do RU
+          photo_profile: data.photo_profile, // Foto de perfil
         });
       } catch (error) {
-        setError(error.message);
+        console.error("Erro ao buscar dados", error);
+        setError("Ocorreu um erro ao buscar os dados do usuário");
       } finally {
         setLoading(false);
       }
     };
 
     fetchUserData();
-  }, [apiUrl]);
+  },[] );
 
   const test = () => console.log("Hello World!");
 
@@ -55,7 +58,7 @@ const ProfilePage = ({ apiUrl }) => {
     <div className={styles.exibirPage}>
       <div className={styles.bodyExibir}>
         <div className={styles.exibirBox}>
-          <img src={reactIcon} alt="Foto de Perfil" className={styles.userIcon} />
+          <img src={userData.photo_profile || reactIcon} alt="Foto de Perfil" className={styles.userIcon} />
           <h1 className={styles.username}>Nome do usuário</h1>
           <h1 className={styles.userAt}>@username</h1>
           <h1 className={styles.description}>
@@ -67,7 +70,7 @@ const ProfilePage = ({ apiUrl }) => {
             culpa.
           </h1>
           <div className={styles.teacherStudent}>
-            <span>{userData.userType}</span>
+            <span>{userData.userType ? "Professor" : "Aluno"}</span>
           </div>
           <div className={styles.topicsTitle}>
             Curso:<br></br>
