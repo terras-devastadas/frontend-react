@@ -8,19 +8,47 @@ import InputField from "../../components/InputField/InputField";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 
-const EditProfilePage = () => {
-  const test = () => console.log("Hello World!");
+const EditProfilePage = ({ apiUrl }) => {
+  const [bio, setBio] = useState("");
+  const [courseName, setCourseName] = useState("");
+  const [semesterName, setSemesterName] = useState("");
+  const [themeName, setThemeName] = useState("");
+  const [meatName, setMeatName] = useState("");
+  const [username, setUsername] = useState("Nome do usuário");
+  const [photo_profile, setProfileImage] = useState("");
+  const [isEditingUsername, setIsEditingUsername] = useState(false);
+  const [userType, setUserType] = useState(""); // Novo estado para "Professor/Aluno"
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [profileDescription, setProfileDescription] = useState<string>("");
-  const [courseName, setCourseName] = useState<string>("");
-  const [semesterName, setSemesterName] = useState<string>("");
-  const [themeName, setThemeName] = useState<string>("");
-  const [meatName, setMeatName] = useState<string>("");
-  const [username, setUsername] = useState<string>("Nome do usuário");
-  const [photo_profile, setProfileImage] = useState<string>("");
-  const [isEditingUsername, setIsEditingUsername] = useState<boolean>(false);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error('Erro ao buscar dados');
+        }
+        const data = await response.json();
+        // Preenche os estados com os dados da API
+        setBio(data.bio || "");
+        setCourseName(data.courseName || "");
+        setSemesterName(data.semesterName || "");
+        setThemeName(data.themeName || "");
+        setMeatName(data.meatName || "");
+        setUsername(data.username || "Nome do usuário");
+        setProfileImage(data.photo_profile || reactIcon);
+        setUserType(data.userType || ""); // Define o tipo de usuário
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    fetchUserData();
+  }, [apiUrl]);
+
+  const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -33,36 +61,19 @@ const EditProfilePage = () => {
     }
   };
 
-  useEffect(() => {
-    // Exemplo de requisição GET
-    api.get('/info')
-      .then(response => {
-        const data = response.data;
-        setProfileDescription(data.bio);
-        setCourseName(data.courseName);
-        setSemesterName(data.semesterName);
-        setThemeName(data.themeName);
-        setMeatName(data.meatName);
-        setUsername(data.username);
-        setProfileImage(`${api.defaults.baseURL}${data.photo_profile}`);
-      })
-      .catch(error => {
-        console.error('Erro ao buscar perfil:', error);
-      });
-  }, []);
-
   const handleSaveProfile = () => {
-    // Exemplo de requisição POST
     const profileData = {
-      profileDescription,
+      bio,
       courseName,
       semesterName,
       themeName,
       meatName,
       username,
-      photo_profile,  
+      photo_profile,
+      userType, // Inclui o tipo de usuário
     };
 
+    // Exemplo de requisição POST para salvar o perfil
     api.post('/info/', profileData)
       .then(response => {
         console.log('Perfil salvo com sucesso:', response.data);
@@ -71,6 +82,14 @@ const EditProfilePage = () => {
         console.error('Erro ao salvar perfil:', error);
       });
   };
+
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+
+  if (error) {
+    return <div>Erro: {error}</div>;
+  }
 
   return (
     <div className={styles.exibirPage}>
@@ -94,7 +113,6 @@ const EditProfilePage = () => {
               style={{ display: 'none' }}
             />
           </div>
-
 
           <div className={styles.usernameBox}>
             {isEditingUsername ? (
@@ -133,60 +151,56 @@ const EditProfilePage = () => {
             className={styles.description}
             htmlFor="description"
             label="Descrição:"
-            value={profileDescription}
-            onChange={(e) => setProfileDescription(e.target.value)}
+            value={bio}
+            onChange={(e) => setbio(e.target.value)}
             required
           />
 
           <div className={styles.teacherStudent}>
-            <span>Professor/Aluno</span>
+            <span>{userType}</span> {/* Exibe o tipo de usuário */}
           </div>
+
           <div className={styles.topicsTitle}>
             Curso:<br />
-            <br />
-            Matrícula: 28903223
-            <br />
-            <br />
-            Semestre Atual:
-            <br />
-            <br />
-            Matéria Favorita:
-            <br />
-            <br />
-            Comida do RU favorita:
             <InputField
               variant="primary"
-              htmlFor="name"
+              htmlFor="course"
               className={styles.topicsCourse}
               label=""
               value={courseName}
               onChange={(e) => setCourseName(e.target.value)}
               required
             />
-
+            <br />
+            Matrícula: 28903223
+            <br />
+            <br />
+            Semestre Atual:
             <InputField
               variant="primary"
-              htmlFor="name"
+              htmlFor="semester"
               className={styles.topicsSemester}
               label=""
               value={semesterName}
               onChange={(e) => setSemesterName(e.target.value)}
               required
             />
-
+            <br />
+            Matéria Favorita:
             <InputField
               variant="primary"
-              htmlFor="name"
+              htmlFor="theme"
               className={styles.topicsTheme}
               label=""
               value={themeName}
               onChange={(e) => setThemeName(e.target.value)}
               required
             />
-
+            <br />
+            Comida do RU favorita:
             <InputField
               variant="primary"
-              htmlFor="name"
+              htmlFor="meat"
               className={styles.topicsMeat}
               label=""
               value={meatName}
@@ -198,7 +212,7 @@ const EditProfilePage = () => {
         </div>
       </div>
 
-      <button className={styles.deleteButton} onClick={test}>
+      <button className={styles.deleteButton} onClick={() => console.log("Deletar conta")}>
         <img src={deleteButton} alt="Botão de Deletar Conta" className={styles.deleteImg} />
       </button>
 

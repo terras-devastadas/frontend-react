@@ -1,9 +1,55 @@
+import React, { useState, useEffect } from 'react';
 import styles from "./ProfilePage.module.css";
 import reactIcon from "../../assets/react.svg";
 import chatBubble from "../../assets/chat_bubble.png";
 
-const ProfilePage = () => {
+const ProfilePage = ({ apiUrl }) => {
+  const [userData, setUserData] = useState({
+    userType: null,
+    course: null,
+    registration: null,
+    currentSemester: null,
+    favoriteSubject: null,
+    favoriteFood: null,
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error('Erro ao buscar dados');
+        }
+        const data = await response.json();
+        setUserData({
+          userType: data.userType, // "Professor" ou "Aluno"
+          course: data.course, // Curso do usuário
+          registration: data.registration, // Matrícula
+          currentSemester: data.currentSemester, // Semestre atual
+          favoriteSubject: data.favoriteSubject, // Matéria favorita
+          favoriteFood: data.favoriteFood, // Comida favorita do RU
+        });
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [apiUrl]);
+
   const test = () => console.log("Hello World!");
+
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+
+  if (error) {
+    return <div>Erro: {error}</div>;
+  }
 
   return (
     <div className={styles.exibirPage}>
@@ -21,23 +67,23 @@ const ProfilePage = () => {
             culpa.
           </h1>
           <div className={styles.teacherStudent}>
-            <span>Professor/Aluno</span>
+            <span>{userData.userType}</span>
           </div>
           <div className={styles.topicsTitle}>
             Curso:<br></br>
+            <h1 className={styles.topicsCourse}>{userData.course}</h1>
             <br></br>
             Matrícula:<br></br>
+            <h1 className={styles.topicsMatricula}>{userData.registration}</h1>
             <br></br>
             Semestre Atual:<br></br>
+            <h1 className={styles.topicsSemester}>{userData.currentSemester}</h1>
             <br></br>
             Matéria Favorita:<br></br>
+            <h1 className={styles.topicsTheme}>{userData.favoriteSubject}</h1>
             <br></br>
             Comida do RU favorita:
-            <h1 className={styles.topicsCourse}>Lorem</h1>
-            <h1 className={styles.topicsMatricula}>Lorem</h1>
-            <h1 className={styles.topicsSemester}>Lorem</h1>
-            <h1 className={styles.topicsTheme}>Lorem</h1>
-            <h1 className={styles.topicsMeat}>Lorem</h1>
+            <h1 className={styles.topicsMeat}>{userData.favoriteFood}</h1>
           </div>
           <div className={styles.linhaVert}></div>
         </div>
