@@ -6,7 +6,7 @@ import styles from './SearchBar.module.css';
 interface SearchResult {
   communityName: string;
   banner: string;
-  // Adicione outras propriedades conforme necessário
+  // Adicionar outras propriedades conforme necessário
 }
 
 const SearchPage = () => {
@@ -16,16 +16,23 @@ const SearchPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
+  // Atualizar o termo de pesquisa quando a URL muda
   useEffect(() => {
     const query = new URLSearchParams(location.search).get('query');
     if (query) {
       setSearchTerm(query);
+    } else {
+      setSearchTerm(""); // Limpar a pesquisa se não houver termo
     }
   }, [location.search]);
 
+  // Buscar os resultados com base no termo de pesquisa
   useEffect(() => {
     const fetchData = async () => {
-      if (!searchTerm) return;
+      if (!searchTerm) {
+        setResults([]); // Limpar os resultados se não houver termo
+        return;
+      }
 
       setLoading(true);
       try {
@@ -43,18 +50,23 @@ const SearchPage = () => {
 
   if (loading) return <div>Carregando...</div>;
   if (error) return <div>Erro: {error.message}</div>;
+
   return (
     <>
-      {results && results.map((result, index) => (
-        <div className={styles.communities} key={index}>
-          <h2 className={styles.title}>{result.communityName}</h2>
-          {result.banner && (
-            <div>
-              <img src={result.banner} alt={`${result.communityName} banner`} className={styles.image} />
-            </div>
-          )}
-        </div>
-      ))}
+      {results.length > 0 ? (
+        results.map((result, index) => (
+          <div className={styles.communities} key={index}>
+            <h2 className={styles.title}>{result.communityName}</h2>
+            {result.banner && (
+              <div>
+                <img src={result.banner} alt={`${result.communityName} banner`} className={styles.image} />
+              </div>
+            )}
+          </div>
+        ))
+      ) : (
+        <div>Nenhum resultado encontrado.</div>
+      )}
     </>
   );
 };

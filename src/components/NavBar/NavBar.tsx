@@ -1,4 +1,3 @@
-// src/components/NavBar.js
 import { Navbar, Container, Nav, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -9,11 +8,12 @@ const NavBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
-  // Função para lidar com a pesquisa
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // Redireciona para a página de busca passando o termo na URL
-    navigate(`/search?query=${searchTerm}`);
+  // Função para atualizar a URL de pesquisa em tempo real
+  const handleSearchChange = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    // Redirecionar para a página de busca com o termo atual
+    navigate(`/search?query=${term}`);
   };
 
   return (
@@ -59,12 +59,12 @@ const NavBar = () => {
           </Nav>
 
           {/* Barra de Pesquisa */}
-          <Form className="d-flex" onSubmit={handleSearch}>
+          <Form className="d-flex">
             <Form.Control
               type="search"
               placeholder="Buscar"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={handleSearchChange} // Atualizar a URL em tempo real
               className={styles["search-bar"]}
               aria-label="Search"
             />
