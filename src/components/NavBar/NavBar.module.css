@@ -55,3 +55,14 @@
   top: 5px;
   left: 20px;
 }
+
+.search-bar {
+  width: 200px;
+  margin-left: 20px; /* Para dar um espaço entre os links e a search bar */
+  padding: 12px;
+  background-color: #fff;
+  border: 0px solid #fff;
+  border-radius: 25px;
+  font-size: 15px;
+  box-sizing: border-box;
+}

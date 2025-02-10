@@ -15,6 +15,7 @@ import CreateCommunityPage from "./pages/CreateCommunity/CreateCommunityPage.tsx
 import CreateClassCommunityPage from "./pages/CreateClassCommunity/CreateClassCommunityPage.tsx";
 import CreatePostPage from "./pages/CreatePost/CreatePostPage.tsx";
 import CommunityPage from "./pages/Community/CommunityPage.tsx";
+import SearchPage from "./pages/SearchBar/SearchBar.tsx";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
         path: "comunidade/:id",
         element: <CommunityPage />,
       },
+      {
+        path: "search",
+        element: <SearchPage />,
+      }
     ],
   },
 ]);
