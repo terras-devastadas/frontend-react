@@ -32,18 +32,24 @@ const CommunityPage = () => {
   return (
     <>
       <div className={styles.communityHeader}>
+        
         <div className={styles.bannerContainer}>{banner ? <img src={banner} alt="Banner da comunidade" className={styles.banner}/>
-         : null}</div>
+         : null}
+        </div>
         
         <div className={styles.communityInfo}>
+
           <div className={styles.iconContainer}>
             <img src={CommunityIcon} alt="Icone de comunidade" width='100' className={styles.icon}/>
           </div>
-          <div className={styles.communityNameContainer}>
+
+          <div className={styles.communityNameContainer}>           
             <h1 className={styles.name}>{communityName}</h1>
-            <p className={styles.description}>{description}</p>
+            <p className={styles.description}>{description}</p>         
           </div>
+
         </div>
+
           <button className={styles.actionButton}>{isInCommunity}</button>
 
       </div>
