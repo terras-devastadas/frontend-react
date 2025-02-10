@@ -8,6 +8,7 @@
   right: 0;
   z-index: 1000;
   margin-bottom: 3rem;
+  position: fixed;
 }
 
 /* Personalizar o texto e links no Navbar */

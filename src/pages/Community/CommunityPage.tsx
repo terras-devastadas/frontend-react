@@ -11,6 +11,7 @@ const CommunityPage = () => {
   const [communityName, setCommunityName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [banner, setBanner] = useState<string>("");
+  const [isInCommunity, setIsInCommunity] = useState<string>("Entrar");
 
   useEffect(() => {
     async function getCommunity() {
@@ -31,14 +32,19 @@ const CommunityPage = () => {
   return (
     <>
       <div className={styles.communityHeader}>
-        <div className={styles.bannerContainer}>{banner ? <img src={banner} alt="Banner da comunidade" className={styles.banner}/> : null}</div>
+        <div className={styles.bannerContainer}>{banner ? <img src={banner} alt="Banner da comunidade" className={styles.banner}/>
+         : null}</div>
         
         <div className={styles.communityInfo}>
-          <img src={CommunityIcon} alt="Icone de comunidade" width='100' className={styles.icon}/>
-          <h1 className={styles.name}>{communityName}</h1>
-          <p className={styles.description}>{description}</p>
-          <button> ENTRAR/SAIR</button>
+          <div className={styles.iconContainer}>
+            <img src={CommunityIcon} alt="Icone de comunidade" width='100' className={styles.icon}/>
+          </div>
+          <div className={styles.communityNameContainer}>
+            <h1 className={styles.name}>{communityName}</h1>
+            <p className={styles.description}>{description}</p>
+          </div>
         </div>
+          <button className={styles.actionButton}>{isInCommunity}</button>
 
       </div>
       <ListPosts endpoint="/posts/"/>
