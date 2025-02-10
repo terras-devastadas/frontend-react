@@ -16,8 +16,9 @@ const ProfilePage = ({}) => {
     favoriteSubject: null,
     favoriteFood: null,
     photo_profile: null,
-    firstName: null, // Novo campo para o nome do usuário
+    first_name: null, // Novo campo para o nome do usuário
     username: null, // Novo campo para o @username
+    bio: null,
   });
 
   useEffect(() => {
@@ -34,8 +35,9 @@ const ProfilePage = ({}) => {
           favoriteSubject: data.subject, // Matéria favorita
           favoriteFood: data.food, // Comida favorita do RU
           photo_profile: data.photo_profile, // Foto de perfil
-          name: data.firstName, // Nome do usuário
+          first_name: data.first_name, // Nome do usuário
           username: data.username, // @username
+          bio: data.bio, // Descrição
         });
       } catch (error) {
         console.error("Erro ao buscar dados", error);
@@ -62,16 +64,28 @@ const ProfilePage = ({}) => {
     <div className={styles.exibirPage}>
       <div className={styles.bodyExibir}>
         <div className={styles.exibirBox}>
-          <img src={userData.photo_profile || reactIcon} alt="Foto de Perfil" className={styles.userIcon} />
-          <h1 className={styles.username}>{userData.firstName}</h1> {/* Nome do usuário */}
+
+
+
+        <img
+            src={
+              userData.photo_profile
+                ? userData.photo_profile.startsWith("http")
+                  ? userData.photo_profile
+                  : `${api.defaults.baseURL}${userData.photo_profile}`
+                : reactIcon
+            }
+            alt="Foto de Perfil"
+            className={styles.userIcon}
+          />
+          
+          
+          
+          
+          <h1 className={styles.username}>{userData.first_name}</h1> {/* Nome do usuário */}
           <h1 className={styles.userAt}>@{userData.username}</h1> {/* @username */}
           <h1 className={styles.description}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quod dolorem repellat quos
-            labore. Laudantium vitae, blanditiis qui saepe, et harum nesciunt laboriosam maxime,
-            repellendus eius maiores adipisci hic quas? Lorem ipsum dolor sit amet consectetur,
-            adipisicing elit. Ducimus beatae unde illum eaque consequatur animi cum aperiam commodi
-            vitae sunt soluta autem corporis obcaecati laudantium sapiente rem, hic necessitatibus
-            culpa.
+            {userData.bio || "Sem descrição"}
           </h1>
           <div className={styles.teacherStudent}>
             <span>{userData.userType ? "Professor" : "Aluno"}</span>

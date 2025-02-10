@@ -64,6 +64,18 @@ const EditProfilePage = () => {
     }
   };
 
+
+  interface ProfileData {
+    subject: string;
+    food: string;
+    username: string;
+    bio: string;
+    course: string;
+    semester: string;
+    photo_profile?: string;
+}
+
+
   const handleSaveProfile = () => {
     const profileData = {
       subject: themeName,
@@ -72,9 +84,12 @@ const EditProfilePage = () => {
       bio,
       course: courseName,
       semester: semesterName,
-      photo_profile,
+      
     };
-
+      
+      if (photo_profile && photo_profile.startsWith("data:")) {
+        profileData.photo_profile = photo_profile;
+      }
     // Exemplo de requisição POST para salvar o perfil
     api.post('/info/', profileData)
       .then(response => {
@@ -101,11 +116,17 @@ const EditProfilePage = () => {
             className={styles.profileImageContainer}
             onClick={() => document.getElementById('file-upload-profile')?.click()}
           >
-            <img
-              src={photo_profile || reactIcon}
-              alt="Foto de Perfil"
-              className={styles.userIcon}
-            />
+          <img
+            src={
+              photo_profile
+                ? photo_profile.startsWith("data:")
+                  ? photo_profile
+                  : `${api.defaults.baseURL}${photo_profile}`
+                : reactIcon
+            }
+            alt="Foto de Perfil"
+            className={styles.userIcon}
+          />
             <input
               type="file"
               onChange={handleImageChange}
