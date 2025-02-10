@@ -91,6 +91,7 @@ const CreateCommunityPage = () => {
             label="Nome da Comunidade:"
             value={communityName}
             onChange={(e) => setCommunityName(e.target.value)}
+            maxLength={80}
             required
           />
           <TextField
@@ -99,6 +100,7 @@ const CreateCommunityPage = () => {
             label="Descrição:"
             value={communityDescription}
             onChange={(e) => setCommunityDescription(e.target.value)}
+            maxLength={279}
             required
           />
         </div>
