@@ -12,8 +12,14 @@ const NavBar = () => {
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
-    // Redirecionar para a página de busca com o termo atual
+    // Redireciona para a página de busca com o termo atual
     navigate(`/search?query=${term}`);
+  };
+
+  // Função para evitar o comportamento padrão do formulário ao pressionar "Enter"
+  const handleFormSubmit = (e) => {
+    e.preventDefault(); // Impede o recarregamento da página
+    navigate(`/search?query=${searchTerm}`); // Garante que a URL seja atualizada
   };
 
   return (
@@ -59,12 +65,12 @@ const NavBar = () => {
           </Nav>
 
           {/* Barra de Pesquisa */}
-          <Form className="d-flex">
+          <Form className="d-flex" onSubmit={handleFormSubmit}>
             <Form.Control
               type="search"
               placeholder="Buscar"
               value={searchTerm}
-              onChange={handleSearchChange} // Atualizar a URL em tempo real
+              onChange={handleSearchChange} // Atualiza a URL em tempo real
               className={styles["search-bar"]}
               aria-label="Search"
             />
