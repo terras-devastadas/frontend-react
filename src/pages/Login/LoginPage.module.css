@@ -1,40 +1,12 @@
-
-.headerBar {
-  background-color: #18A75B;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-  padding: 7px 0px;
-  position: fixed; 
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000; 
-}
-
-.headerBar span {
-  color: #004420;
-  font-family: serif;
-  font-size: 2rem;
-  position: relative;
-  top: 3px;
-  left: 16px;
-}
-
-.headerBar img {
-  height: 50px;
-  width: auto;
-  align-items: center;
-  position: relative;
-  top: -3px;
-  left: 15px;
-}
-
 .loginPage {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
   background-color: #A0B1C9;
-  padding-top: 0px; 
+  padding-top: 0px;
+  margin-left: -250px;
+  margin-top: 5rem;
 }
 
 .bodyLogin {

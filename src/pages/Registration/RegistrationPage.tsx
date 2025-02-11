@@ -39,7 +39,7 @@ const RegistrationPage = () => {
       <h2 className="registration-title">CADASTRO</h2>
       <InputField htmlFor="name" label="Nome:" ref={inputName} required></InputField>
       <InputField htmlFor="lastName" label="Sobrenome:" ref={inputLastName}></InputField>
-      <InputField htmlFor="username" label="Nome do Usuário:" ref={inputUsername}></InputField>
+      <InputField htmlFor="username" label="Apelido:" ref={inputUsername}></InputField>
       <InputField type="email" htmlFor="email" label="E-mail institucional:" ref={inputEmail}></InputField>
       <InputField type="password" htmlFor="password" label="Crie uma senha:" ref={inputPassword1}></InputField>
       <InputField type="password" htmlFor="password" label="Confirme sua senha:" ref={inputPassword2}></InputField>

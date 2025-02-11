@@ -13,13 +13,13 @@
 
 /* Corpo principal */
 .bodyExibir {
-    width: 15000px;
-    height: 10px;
+    width: 100%;
+    margin: 0 auto;
+    height: auto;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
-
 /* Caixa do conteúdo do perfil */
 .exibirBox {
     margin-top: -50px;

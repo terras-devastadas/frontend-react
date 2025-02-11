@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import styles from '../LateralBar/LateralBar.module.css';
 import CommunityIcon from '../../assets/CommunityIcon.png';
+import Avatar from "../../assets/AvatarPlaceholder.png";
 
 interface Community {
   id: string;
@@ -12,47 +13,68 @@ interface Community {
 
 const LateralBar = () => {
   const [communities, setCommunities] = useState<Community[]>([]);
+  const [username, setUsername] = useState("");
+  // const [profilePicture, setProfilePicture] = useState();
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchCommunities() {
-      const userString = sessionStorage.getItem('User');
+      const userString = sessionStorage.getItem('User');//resgata o user
       if (!userString) return;
+      
+      const userJson = JSON.parse(userString);//convertendo para json
+      setUsername(userJson.username);//seta o user
+      setProfilePicture(userJson.photo_profile);//seta a foto de perfil
+      console.log(userJson.photo_profile);
 
-      const userCredentials = JSON.parse(userString);
-      const communitiesIds: string[] = userCredentials.community_ids || [];
+
+      const communitiesIds: string[] = userJson.community_ids;
 
       if (communitiesIds.length === 0) return;
 
       try {
-        const response = await api.get('/communities/', { params: { ids: communitiesIds.join(',') } })
+        const response = await api.get('/users/my-communities/')
         setCommunities(response.data);
       } catch (error) {
         console.error("Erro ao buscar comunidades:", error);
       };
     };
     fetchCommunities();
+
+    const updateCommunities = () => {
+      fetchCommunities(); // Função que refaz a requisição das comunidades
+    };
+    window.addEventListener("community-joined", updateCommunities);
+  
+    return () => {
+      window.removeEventListener("community-joined", updateCommunities);
+    };
   }, []);
-
-
-  // Executa o fetch no mount
-  // useEffect(() => {
-  //   fetchCommunities();
-  // }, [fetchCommunities]);
-
-  // // Listener para atualizar as comunidades quando o evento for disparado
-  // useEffect(() => {
-  //   window.addEventListener('communityUpdate', fetchCommunities);
-  //   return () => window.removeEventListener('communityUpdate', fetchCommunities);
-  // }, [fetchCommunities]);
 
   return (
     <aside className={styles.sidebar}>
-      <h2 className={styles.title}>Minhas Comunidades</h2>
+      <Link to="/editar-perfil" className={styles.createCommunityButton}>
+        <div className={styles.profilePictureContainer} title='Ver perfil'>
+          <img
+              src={
+                profilePicture
+                  ? profilePicture.startsWith("http")
+                    ? profilePicture
+                    : `${api.defaults.baseURL}${profilePicture}`
+                  : Avatar
+              }
+              alt="Foto de Perfil"
+              className={styles.profilePicture}
+          />
+        </div>
+      </Link>      
+      <h2 className={styles.username}>@{username}</h2>
+      <h2 className={styles.title}>Minhas Comunidades:</h2>
       <ul className={styles.communityList}>
         {communities.map((community) => (
           <li key={community.id} className={styles.communityItem}>
             <Link to={`/comunidade/${community.id}`} className={styles.communityLink}>
-              <div className={styles.communityBox}>
+              <div className={styles.communityBox} title={community.communityName}>
                 <span className={styles.iconGroup}>
                   <img src={CommunityIcon} alt="Ícone da comunidade" />
                 </span>

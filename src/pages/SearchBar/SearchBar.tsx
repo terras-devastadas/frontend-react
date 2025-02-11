@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import api from '../../services/api';
 import styles from './SearchBar.module.css';
@@ -51,27 +51,34 @@ const SearchPage = () => {
     fetchData();
   }, [searchTerm]);
 
-  const handleJoinCommunity = (id: string) => {
+  const handleJoinCommunity = async (id: string) => {
     const userString = sessionStorage.getItem('User');
     if (!userString) {
       console.error("Usuário não encontrado no sessionStorage");
       return;
     }
     const user = JSON.parse(userString);
-    const listCommunity = user.community_ids.push(id);
+    const listCommunity: string[] = user.community_ids || [];
+
+    if (listCommunity.includes(id)) {
+      console.log("Usuário já faz parte da comunidade.");
+      return;
+    }
     
+    try{
+      const updatedCommunityIds = [...listCommunity, id];//Criando uma nova lista com o id da nova comunidade
+      const response = await api.post(`/info/`, {community_ids: updatedCommunityIds})
 
-    api.post(`/info/`, {community_ids: [listCommunity]})
-    .then(response => {
-      sessionStorage.setItem('User', JSON.stringify(user));
-
-      console.log("Requisição enviada com sucesso:", response.data);
-      // Aqui você pode, por exemplo, redirecionar ou exibir uma mensagem
-      window.dispatchEvent(new CustomEvent("community-joined"));
-    })
-    .catch(error => {
+      if(response.status === 200){
+        user.community_ids = updatedCommunityIds;//atualiando a lista de comunidades do user
+        sessionStorage.setItem('User', JSON.stringify(user));
+        window.dispatchEvent(new CustomEvent("community-joined"));
+        console.log("Usuário adicionado à comunidade com sucesso.");
+      }
+    } catch (error) {
       console.error("Erro ao enviar requisição:", error);
-    });
+    }
+ 
 };
 
   if (loading) return <div>Carregando...</div>;
@@ -81,46 +88,32 @@ const SearchPage = () => {
     <>
       {results.length > 0 ? (
         results.map((result, index) => (
-         
-
-
           <div className={styles.communities} key={index}>
-
-
             {result.banner && (
-              
               <div className={styles.bannerContainer}>
                 <img src={result.banner} alt={`${result.communityName} banner`} className={styles.image} />
               </div>
-
             )}
 
             <div className={styles.communityInfo}>
-              
               <div className={styles.iconContainer}>
                 <img src={CommunityIcon} alt="Icone de comunidade" width='100' className={styles.icon} />
               </div>
 
               <div className={styles.communityNameContainer}>
-
                 <div className={styles.title}>
                 <Link to={`/comunidade/${result.id}`} className={styles.link} key={index}>
                   <h2 className={styles.name}>{result.communityName}</h2>
                   </Link>
                 </div>
+                
                 <div className={styles.description}>
                   <p>{result.communityDescription}</p>
-                  </div>
-
+                </div>
               </div>
-
             </div>
-
             <button className={styles.actionButton} onClick={() => handleJoinCommunity(result.id)}>Entrar</button>
-
           </div>
-
-
         ))
       ) : (
         <div>Nenhum resultado encontrado.</div>

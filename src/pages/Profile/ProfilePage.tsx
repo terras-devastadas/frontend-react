@@ -81,7 +81,7 @@ const ProfilePage = ({}) => {
           
           
           
-          
+
           <h1 className={styles.username}>{userData.first_name}</h1> {/* Nome do usuário */}
           <h1 className={styles.userAt}>@{userData.username}</h1> {/* @username */}
           <h1 className={styles.description}>
