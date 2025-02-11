@@ -24,7 +24,7 @@ const LateralBar = () => {
       if (communitiesIds.length === 0) return;
 
       try {
-        const response = await api.get('/communities/', { params: { ids: communitiesIds.join(',') } })
+        const response = await api.get('/users/my-communities/', { params: { ids: communitiesIds.join(',') } })
         setCommunities(response.data);
       } catch (error) {
         console.error("Erro ao buscar comunidades:", error);

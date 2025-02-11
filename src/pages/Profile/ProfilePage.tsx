@@ -1,14 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import styles from "./ProfilePage.module.css";
 import reactIcon from "../../assets/react.svg";
 import chatBubble from "../../assets/chat_bubble.png";
 import api from "../../services/api";
+import { useLocation } from "react-router-dom";
+
+interface UserData {
+  userType: boolean | null;
+  course: string | null;
+  registration: string | null;
+  currentSemester: string | null;
+  favoriteSubject: string | null;
+  favoriteFood: string | null;
+  photo_profile: string | null;
+  first_name: string | null;
+  username: string | null;
+  bio: string | null;
+}
+
 
 const ProfilePage = ({}) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
-  const [userData, setUserData] = useState({
+  const location = useLocation();
+
+  const initialUser: UserData | null = location.state
+    ? {
+        userType: (location.state as any).is_staff,
+        course: (location.state as any).course,
+        registration: (location.state as any).matricula,
+        currentSemester: (location.state as any).semester,
+        favoriteSubject: (location.state as any).subject,
+        favoriteFood: (location.state as any).food,
+        photo_profile: (location.state as any).photo_profile,
+        first_name: (location.state as any).first_name,
+        username: (location.state as any).username,
+        bio: (location.state as any).bio,
+      }
+    : null;
+
+
+  const [loading, setLoading] = useState(initialUser ? false : true);
+  const [error, setError] = useState('');
+  const [userData, setUserData] = useState<UserData>( initialUser ||{
     userType: null,
     course: null,
     registration: null,
@@ -22,6 +55,9 @@ const ProfilePage = ({}) => {
   });
 
   useEffect(() => {
+
+    if (initialUser) return;
+
     const fetchUserData = async () => {
       try {
         const response = await api.get('/info/');
