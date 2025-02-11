@@ -52,8 +52,19 @@ const SearchPage = () => {
   }, [searchTerm]);
 
   const handleJoinCommunity = (id: string) => {
-    api.post(`/info/`, {community_ids: [id]})
+    const userString = sessionStorage.getItem('User');
+    if (!userString) {
+      console.error("Usuário não encontrado no sessionStorage");
+      return;
+    }
+    const user = JSON.parse(userString);
+    const listCommunity = user.community_ids.push(id);
+    
+
+    api.post(`/info/`, {community_ids: [listCommunity]})
     .then(response => {
+      sessionStorage.setItem('User', JSON.stringify(user));
+
       console.log("Requisição enviada com sucesso:", response.data);
       // Aqui você pode, por exemplo, redirecionar ou exibir uma mensagem
       window.dispatchEvent(new CustomEvent("community-joined"));

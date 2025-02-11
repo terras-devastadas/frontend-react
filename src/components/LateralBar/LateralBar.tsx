@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
-import styles from './LateralBar.module.css';
+import styles from '../LateralBar/LateralBar.module.css';
 import CommunityIcon from '../../assets/CommunityIcon.png';
 
 interface Community {
@@ -13,35 +13,37 @@ interface Community {
 const LateralBar = () => {
   const [communities, setCommunities] = useState<Community[]>([]);
 
-  const fetchCommunities = useCallback(() => {
-    const userString = sessionStorage.getItem('User');
-    if (!userString) return;
+  useEffect(() => {
+    async function fetchCommunities() {
+      const userString = sessionStorage.getItem('User');
+      if (!userString) return;
 
-    const userCredentials = JSON.parse(userString);
-    const communitiesIds: string[] = userCredentials.community_ids || [];
+      const userCredentials = JSON.parse(userString);
+      const communitiesIds: string[] = userCredentials.community_ids || [];
 
-    if (communitiesIds.length === 0) return;
+      if (communitiesIds.length === 0) return;
 
-    api.get('/communities', { params: { ids: communitiesIds.join(',') } })
-      .then(response => {
-        // Supondo que a resposta retorne o array de comunidades
+      try {
+        const response = await api.get('/communities/', { params: { ids: communitiesIds.join(',') } })
         setCommunities(response.data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error("Erro ao buscar comunidades:", error);
-      });
+      };
+    };
+    fetchCommunities();
   }, []);
 
-  // Executa o fetch no mount
-  useEffect(() => {
-    fetchCommunities();
-  }, [fetchCommunities]);
 
-  // Listener para atualizar as comunidades quando o evento for disparado
-  useEffect(() => {
-    window.addEventListener('communityUpdate', fetchCommunities);
-    return () => window.removeEventListener('communityUpdate', fetchCommunities);
-  }, [fetchCommunities]);
+  // Executa o fetch no mount
+  // useEffect(() => {
+  //   fetchCommunities();
+  // }, [fetchCommunities]);
+
+  // // Listener para atualizar as comunidades quando o evento for disparado
+  // useEffect(() => {
+  //   window.addEventListener('communityUpdate', fetchCommunities);
+  //   return () => window.removeEventListener('communityUpdate', fetchCommunities);
+  // }, [fetchCommunities]);
 
   return (
     <aside className={styles.sidebar}>
@@ -64,6 +66,6 @@ const LateralBar = () => {
       </ul>
     </aside>
   );
-};
+}
 
 export default LateralBar;
