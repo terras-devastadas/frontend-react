@@ -40,7 +40,7 @@ const CommunityPage = () => {
         <div className={styles.communityInfo}>
 
           <div className={styles.iconContainer}>
-            <img src={CommunityIcon} alt="Icone de comunidade" width='100' className={styles.icon}/>
+            <img src={CommunityIcon} alt="Icone de comunidade" className={styles.icon}/>
           </div>
 
           <div className={styles.communityNameContainer}>           

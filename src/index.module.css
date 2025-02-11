@@ -1,5 +1,6 @@
 .container {
-  display: flex;
+    margin-top: 6.4rem !important;
+    display: flex;
 }
 
 /* O mainContent agora terá margem à esquerda igual à largura da sidebar */
@@ -9,3 +10,4 @@
   flex: 1;
   padding: 16px;
 }
+

@@ -38,6 +38,10 @@ function LoginPage() {
     setLoading(true);
     setErrorMessage("");
 
+    if(sessionStorage.getItem("Token")){
+      await api.post("/logout/");
+    } 
+    
     sessionStorage.clear(); // Removendo Token e user
 
     try {
@@ -100,7 +104,7 @@ function LoginPage() {
           {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
 
           <div className={styles.footer}>
-            <Link to="/registration">
+            <Link to="/cadastro">
               <span className={styles.cadastro}>Não possui conta? Cadastre-se!</span>
             </Link>
             <button onClick={handleLogin} disabled={loading} className={styles.submitButton}>

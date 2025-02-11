@@ -35,7 +35,7 @@ const EditProfilePage = () => {
         setSemesterName(data.semester || "");
         setThemeName(data.subject || "");
         setMeatName(data.food || "");
-        setFirstName(data.firstName || "Nome do usuário"); // Nome do usuário (firstName)
+        setFirstName(data.first_name || "Nome do usuário"); // Nome do usuário (firstName)
         setUsername(data.username ? `@${data.username}` : "@username"); // @username
         setProfileImage(data.photo_profile);
         setUserType(data.is_staff || ""); // Define o tipo de usuário
@@ -65,15 +65,15 @@ const EditProfilePage = () => {
   };
 
 
-  interface ProfileData {
-    subject: string;
-    food: string;
-    username: string;
-    bio: string;
-    course: string;
-    semester: string;
-    photo_profile?: string;
-}
+//   interface ProfileData {
+//     subject: string;
+//     food: string;
+//     username: string;
+//     bio: string;
+//     course: string;
+//     semester: string;
+//     photo_profile?: string;
+// }
 
 
   const handleSaveProfile = () => {
