@@ -1,0 +1,56 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #0b2548;
+  padding: 16px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.title {
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.communityList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.communityItem {
+  margin-bottom: 12px;
+}
+
+.communityBox {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.iconGroup {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+
+}
+.iconGroup img {
+  width: 20px;
+  height: auto;
+}
+
+.communityName {
+  font-size: 16px;
+  color: #fff;
+}
+
+.communityLink {
+  text-decoration: none;
+  color: inherit;
+}

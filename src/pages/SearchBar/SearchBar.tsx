@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import api from '../../services/api';
 import styles from './SearchBar.module.css';
+import CommunityIcon from '../../assets/CommunityIcon.png';
 
 interface SearchResult {
   communityName: string;
   banner: string;
+  id: string;
+  communityDescription: string;
   // Adicionar outras propriedades conforme necessário
 }
 
@@ -48,6 +51,29 @@ const SearchPage = () => {
     fetchData();
   }, [searchTerm]);
 
+  const handleJoinCommunity = (id: string) => {
+    const userString = sessionStorage.getItem('User');
+    if (!userString) {
+      console.error("Usuário não encontrado no sessionStorage");
+      return;
+    }
+    const user = JSON.parse(userString);
+    const listCommunity = user.community_ids.push(id);
+    
+
+    api.post(`/info/`, {community_ids: [listCommunity]})
+    .then(response => {
+      sessionStorage.setItem('User', JSON.stringify(user));
+
+      console.log("Requisição enviada com sucesso:", response.data);
+      // Aqui você pode, por exemplo, redirecionar ou exibir uma mensagem
+      window.dispatchEvent(new CustomEvent("community-joined"));
+    })
+    .catch(error => {
+      console.error("Erro ao enviar requisição:", error);
+    });
+};
+
   if (loading) return <div>Carregando...</div>;
   if (error) return <div>Erro: {error.message}</div>;
 
@@ -55,14 +81,46 @@ const SearchPage = () => {
     <>
       {results.length > 0 ? (
         results.map((result, index) => (
+         
+
+
           <div className={styles.communities} key={index}>
-            <h2 className={styles.title}>{result.communityName}</h2>
+
+
             {result.banner && (
-              <div>
+              
+              <div className={styles.bannerContainer}>
                 <img src={result.banner} alt={`${result.communityName} banner`} className={styles.image} />
               </div>
+
             )}
+
+            <div className={styles.communityInfo}>
+              
+              <div className={styles.iconContainer}>
+                <img src={CommunityIcon} alt="Icone de comunidade" width='100' className={styles.icon} />
+              </div>
+
+              <div className={styles.communityNameContainer}>
+
+                <div className={styles.title}>
+                <Link to={`/comunidade/${result.id}`} className={styles.link} key={index}>
+                  <h2 className={styles.name}>{result.communityName}</h2>
+                  </Link>
+                </div>
+                <div className={styles.description}>
+                  <p>{result.communityDescription}</p>
+                  </div>
+
+              </div>
+
+            </div>
+
+            <button className={styles.actionButton} onClick={() => handleJoinCommunity(result.id)}>Entrar</button>
+
           </div>
+
+
         ))
       ) : (
         <div>Nenhum resultado encontrado.</div>

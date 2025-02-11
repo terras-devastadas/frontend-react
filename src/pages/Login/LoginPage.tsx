@@ -51,9 +51,14 @@ function LoginPage() {
       });
 
       if (response.status === 200) {
-        const userResponse = await api.get("/users/");
+        // Armazena o token primeiro
         sessionStorage.setItem("Token", response.data.token);
-        sessionStorage.setItem("User", userResponse.data);
+  
+        // Agora a requisição de informações do usuário enviará o token
+        const userResponse = await api.get("/info/");
+        // Armazene as informações do usuário convertendo o objeto para string
+        sessionStorage.setItem("User", JSON.stringify(userResponse.data));
+        
         navigate("/");
         
       } else {
