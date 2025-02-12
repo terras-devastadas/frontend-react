@@ -2,16 +2,20 @@ import styles from "./CreatePostPage.module.css";
 import InputField from "../../components/InputField/InputField";
 import TextField from "../../components/TextField/TextField";
 import addIcon from "../../assets/addIcon.png";
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
+import { useLocation } from "react-router-dom";
 
 const CreatePostPage = () => {
+
+  const location = useLocation();
+  const communityId = location.state as string;
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const navigate = useNavigate();
   const [imagem, setImagem] = useState<string>("");
+  const [community, setCommunity] = useState(communityId || '');
 
   async function createPost() {
     if (!title) return; 
@@ -21,11 +25,11 @@ const CreatePostPage = () => {
         title: title,
         content: content,
         image: imagem,
-        // community: 1,//Implementar isso
+        community,//Implementar isso
       });
 
       console.log("Post criado com sucesso:", response.data);
-      navigate("/");
+      navigate("/comunidade/" + communityId);
     } catch (error) {
       console.error("Erro ao criar post:", error);
     }

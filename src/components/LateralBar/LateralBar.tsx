@@ -54,7 +54,7 @@ const LateralBar = () => {
     const response = await api.post('/logout/');
     if (response.status === 200) {
       sessionStorage.clear();
-      navigate('/login');
+      navigate('/login/');
     }
   }
   
