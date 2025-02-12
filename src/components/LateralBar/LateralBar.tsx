@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import styles from '../LateralBar/LateralBar.module.css';
 import CommunityIcon from '../../assets/CommunityIcon.png';
-import Avatar from "../../assets/AvatarPlaceholder.png";
-import ArrowLeft from '../../assets/ArrowLeft.png';
+import Avatar from "../../assets/genericAvatar.png";
+import LogoutIcon from '../../assets/logout.png';
 import { useNavigate } from 'react-router-dom';
 
 interface Community {
@@ -18,6 +18,7 @@ const LateralBar = () => {
   const [username, setUsername] = useState("");
   // const [profilePicture, setProfilePicture] = useState();
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
+  const [isStaff, setIsStaff] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,8 +29,7 @@ const LateralBar = () => {
       const userJson = JSON.parse(userString);//convertendo para json
       setUsername(userJson.username);//seta o user
       setProfilePicture(userJson.photo_profile);//seta a foto de perfil
-      console.log(userJson.photo_profile);
-
+      setIsStaff(userJson.is_staff);
 
       const communitiesIds: string[] = userJson.community_ids;
 
@@ -53,7 +53,7 @@ const LateralBar = () => {
       window.removeEventListener("community-joined", updateCommunities);
     };
   }, []);
-////////////////
+
   const handleLogout = async () => {
     const response = await api.post('/logout/');
     if (response.status === 200) {
@@ -61,23 +61,19 @@ const LateralBar = () => {
       navigate('/login');
     }
   }
-/////////////////
+  
   return (
     <aside className={styles.sidebar}>
       <div className={styles.buttonsContainer}>
         <div className={styles.createCommunityContainer}>
-          <Link to="/criar-comunidade" >
+          <Link to={isStaff? '/criar-comunidade-professor' : '/criar-comunidade'} >
             <img src={CommunityIcon} alt="Criar comunidade" title='Criar comunidade' className={styles.createCommunityButton}/>
           </Link>
         </div>
-          
         <div className={styles.logoutContainer}>
-            <img src={ArrowLeft} alt="Logout" onClick={handleLogout} className={styles.logout}/>
+            <img src={LogoutIcon} alt="Logout" onClick={handleLogout} className={styles.logout} title='Logout'/>
         </div>
       </div>
-
-
-  
       <Link to="/editar-perfil">
         <div className={styles.profilePictureContainer} title='Ver perfil'>
           <img

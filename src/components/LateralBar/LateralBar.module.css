@@ -8,6 +8,7 @@
   padding: 16px;
   overflow-y: auto;
   z-index: 100;
+  overflow: hidden;
 }
 
 .profilePictureContainer {
@@ -45,8 +46,16 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  height: 300px;
+
+  overflow: auto;
+  scrollbar-width: none;  /* Para Firefox */
+  -ms-overflow-style: none; /* Para Internet Explorer e Edge */
 }
 
+.communityList::-webkit-scrollbar {
+  display: none; /* Para Chrome, Safari e Edge */
+}
 .communityItem {
   margin-bottom: 12px;
 }

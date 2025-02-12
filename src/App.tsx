@@ -5,8 +5,8 @@ import styles from "../src/index.module.css";
 
 function App() {
   const location = useLocation();
-  const hiddenNavRoutes = ["/login", "/cadastro"];
-  const hiddenLateralBarRoutes = ["/login", "/cadastro"];
+  const hiddenNavRoutes = ["/login", "/cadastro", "/login/", "/cadastro/"];
+  const hiddenLateralBarRoutes = ["/login", "/cadastro", "/login/", "/cadastro/"];
   const showNavBar = !hiddenNavRoutes.includes(location.pathname);
   const showLateralBar = !hiddenLateralBarRoutes.includes(location.pathname);
 
