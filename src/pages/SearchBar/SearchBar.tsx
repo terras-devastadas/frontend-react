@@ -19,6 +19,8 @@ const SearchPage = () => {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+  const [loadingUser, setLoadingUser] = useState(true);
+  const [followingCommunities, setFollowingCommunities] = useState<string[]>([]);
 
   // Atualizar o termo de pesquisa quando a URL muda
   useEffect(() => {
@@ -52,35 +54,55 @@ const SearchPage = () => {
     fetchData();
   }, [searchTerm]);
 
-  const handleJoinCommunity = async (id: string) => {
+  useEffect(() => {
+    const loadUserData = () => {
+      const userString = sessionStorage.getItem('User');
+      if (userString) {
+        const user = JSON.parse(userString);
+        setFollowingCommunities(user.community_ids || []);
+      }
+      setLoadingUser(false); // Dados do usuário carregados
+    };
+
+    loadUserData();
+  }, []);
+
+  const handleActionCommunity = async (id: string) => {
+    if (loadingUser) return; // Previne ações antes dos dados carregarem
+
     const userString = sessionStorage.getItem('User');
-    if (!userString) {
-      console.error("Usuário não encontrado no sessionStorage");
-      return;
-    }
+    if (!userString) return;
+
     const user = JSON.parse(userString);
-    const listCommunity: string[] = user.community_ids || [];
+    let updatedCommunityIds = [...user.community_ids];
 
-    if (listCommunity.includes(id)) {
-      console.log("Usuário já faz parte da comunidade.");
-      return;
+    if (followingCommunities.includes(id)) {
+      updatedCommunityIds = updatedCommunityIds.filter(communityId => communityId !== id);
+    } else {
+      updatedCommunityIds.push(id);
     }
-    
-    try{
-      const updatedCommunityIds = [...listCommunity, id];//Criando uma nova lista com o id da nova comunidade
-      const response = await api.post(`/info/`, {community_ids: updatedCommunityIds})
 
-      if(response.status === 200){
-        user.community_ids = updatedCommunityIds;//atualiando a lista de comunidades do user
+    try {
+      const response = await api.post(`/info/`, { community_ids: updatedCommunityIds });
+
+      if (response.status === 200) {
+        user.community_ids = updatedCommunityIds;
         sessionStorage.setItem('User', JSON.stringify(user));
+        setFollowingCommunities(updatedCommunityIds);
         window.dispatchEvent(new CustomEvent("community-joined"));
-        console.log("Usuário adicionado à comunidade com sucesso.");
       }
     } catch (error) {
-      console.error("Erro ao enviar requisição:", error);
+      console.error("Erro ao atualizar comunidade:", error);
     }
- 
-};
+  };
+
+  if (loading || loadingUser) {
+    return (
+      <div className={styles.loadingContainer}>
+        <ClipLoader color="#0b2548" loading={true} size={50} />
+      </div>
+    );
+  }
 
   if (loading) return(
     <div className={styles.loadingContainer}> 
@@ -117,7 +139,7 @@ const SearchPage = () => {
                 </div>
               </div>
             </div>
-            <button className={styles.actionButton} onClick={() => handleJoinCommunity(result.id)}>Entrar</button>
+            <button className={styles.actionButton} onClick={() => handleActionCommunity(result.id)}>{followingCommunities.includes(result.id) ? "Sair" : "Seguir"}</button>
           </div>
         ))
       ) : (

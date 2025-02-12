@@ -31,10 +31,6 @@ const LateralBar = () => {
       setProfilePicture(userJson.photo_profile);//seta a foto de perfil
       setIsStaff(userJson.is_staff);
 
-      const communitiesIds: string[] = userJson.community_ids;
-
-      if (communitiesIds.length === 0) return;
-
       try {
         const response = await api.get('/users/my-communities/')
         setCommunities(response.data);
