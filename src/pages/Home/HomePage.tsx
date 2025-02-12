@@ -1,17 +1,25 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 // import api from "../../services/api";
-import styles from "./HomePage.module.css";
+// import styles from "./HomePage.module.css";
 import ListPosts from "../../components/ListPosts/ListPosts";
+import { useNavigate } from "react-router-dom";
 
 
 const HomePage = () => {
   const token = sessionStorage.getItem("Token");
-  
-  // O usuário precisa estar logado para acessar essa página
-  // Verificar se o token está presente no localStorage
+  const [render, setRender] = useState(false);
+  const navigate = useNavigate();
 
-    if(token == null) { 
-        return <div>Você precisa estar logado para acessar essa página</div>
+  useEffect(() => {
+      if(token == null) { 
+        navigate("/login");
+      } else {
+        setRender(true);
+      }
+    });
+    
+    if(!render){
+      return (<div>Você precisa estar logado para acessar essa página</div>);
     }
     
   return (

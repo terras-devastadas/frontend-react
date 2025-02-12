@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import api from '../../services/api';
 import styles from './SearchBar.module.css';
 import CommunityIcon from '../../assets/CommunityIcon.png';
+import { ClipLoader } from 'react-spinners';
 
 interface SearchResult {
   communityName: string;
@@ -81,7 +82,11 @@ const SearchPage = () => {
  
 };
 
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return(
+    <div className={styles.loadingContainer}> 
+      <ClipLoader color="#0b2548" loading={true} size={50} />
+    </div>
+  )
   if (error) return <div>Erro: {error.message}</div>;
 
   return (

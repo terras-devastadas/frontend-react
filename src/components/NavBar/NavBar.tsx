@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styles from "./NavBar.module.css";
 import lasagneLogo from "../../assets/lasagneLogo.png";
+import CommunityIcon from "../../assets/CommunityIcon.png";
 
 const NavBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -38,21 +39,6 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" style={{ justifyContent: "center" }}>
           <Nav className="">
-            <Nav.Link href="/" className={styles["nav-link"]}>
-              Home
-            </Nav.Link>
-            <Nav.Link href="/login" className={styles["nav-link"]}>
-              Login
-            </Nav.Link>
-            <Nav.Link href="/cadastro" className={styles["nav-link"]}>
-              Cadastro
-            </Nav.Link>
-            <Nav.Link href="/perfil" className={styles["nav-link"]}>
-              Perfil
-            </Nav.Link>
-            <Nav.Link href="/editar-perfil" className={styles["nav-link"]}>
-              Editar Perfil
-            </Nav.Link>
             <Nav.Link href="/criar-comunidade" className={styles["nav-link"]}>
               Criar comunidade
             </Nav.Link>
@@ -62,11 +48,7 @@ const NavBar = () => {
             <Nav.Link href="/criar-post" className={styles["nav-link"]}>
               Criar post
             </Nav.Link>
-            <Nav.Link href="/comunidade" className={styles["nav-link"]}>
-              Comunidade
-            </Nav.Link>
           </Nav>
-
           {/* Barra de Pesquisa */}
           <Form className="d-flex" onSubmit={handleFormSubmit}>
             <Form.Control

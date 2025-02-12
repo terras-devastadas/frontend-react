@@ -6,8 +6,7 @@
     align-items: center;
     margin-bottom: 20px;
     background-color:  #0b2548;
- 
-
+    width: 800px;
     position: relative;
     border-radius: 20px;
     margin-top: 80px;
@@ -29,6 +28,11 @@
     font-size: 18px;
     margin: 10px;
     color: #858585;
+
+    word-break: normal;
+    overflow-wrap: break-word;
+    white-space: normal;
+    width: 610px; 
 }
 
 
@@ -119,4 +123,13 @@
 .link{
     text-decoration: none;
     color: #FFFFFF;
+}
+
+.loadingContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    height: 80vh;
 }

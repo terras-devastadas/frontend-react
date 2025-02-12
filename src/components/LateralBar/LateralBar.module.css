@@ -81,3 +81,44 @@
   text-decoration: none;
   color: inherit;
 }
+
+.createCommunityButton {
+  width: 30px;
+  height: 30px;
+
+}
+
+.createCommunityContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  justify-self: flex-end;
+}
+
+.logout {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.logoutContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  justify-self: flex-start;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin-top: 16px;
+}

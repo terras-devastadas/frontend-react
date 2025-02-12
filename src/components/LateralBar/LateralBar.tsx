@@ -4,6 +4,7 @@ import api from '../../services/api';
 import styles from '../LateralBar/LateralBar.module.css';
 import CommunityIcon from '../../assets/CommunityIcon.png';
 import Avatar from "../../assets/AvatarPlaceholder.png";
+import ArrowLeft from '../../assets/ArrowLeft.png';
 
 interface Community {
   id: string;
@@ -51,9 +52,24 @@ const LateralBar = () => {
     };
   }, []);
 
+  const handleLogout = () => {}
+
   return (
     <aside className={styles.sidebar}>
-      <Link to="/editar-perfil" className={styles.createCommunityButton}>
+      <div className={styles.buttonsContainer}>
+        <div className={styles.createCommunityContainer}>
+          <Link to="/criar-comunidade" >
+            <img src={CommunityIcon} alt="Criar comunidade" title='Criar comunidade' className={styles.createCommunityButton}/>
+          </Link>
+        </div>  
+        <div className={styles.logoutContainer}>
+            <img src={ArrowLeft} alt="Logout" onClick={handleLogout} className={styles.logout}/>
+        </div>
+      </div>
+
+
+  
+      <Link to="/editar-perfil">
         <div className={styles.profilePictureContainer} title='Ver perfil'>
           <img
               src={

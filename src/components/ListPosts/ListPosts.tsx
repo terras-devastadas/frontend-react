@@ -4,7 +4,7 @@ import styles from "./ListPosts.module.css";
 import React from "react";
 import Avatar from "../../assets/AvatarPlaceholder.png";
 import { Link } from "react-router-dom";
-// import { Link } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 interface ListPostsProps {
   endpoint: string;
@@ -28,7 +28,9 @@ const ListPosts: React.FC<ListPostsProps> = ({ endpoint }) => {
 
   if (!posts) {
     return (
-      <div>Carregando...</div>
+      <div className={styles.loadingContainer}> 
+        <ClipLoader color="#0b2548" loading={true} size={50} />
+      </div>
     )
   }
 
