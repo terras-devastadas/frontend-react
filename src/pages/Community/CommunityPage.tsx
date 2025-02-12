@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./CommunityPage.module.css";
 import ListPosts from "../../components/ListPosts/ListPosts";
@@ -27,35 +27,43 @@ const CommunityPage = () => {
     getCommunity();
   }, [id]);
 
+
+
   //Arrumar o componente dos posts para pegar a comunidade correta
   //verificar se tem banner
   return (
     <>
       <div className={styles.communityHeader}>
-        
-        <div className={styles.bannerContainer}>{banner ? <img src={banner} alt="Banner da comunidade" className={styles.banner}/>
-         : null}
+
+        <div className={styles.bannerContainer}>{banner ? <img src={banner} alt="Banner da comunidade" className={styles.banner} />
+          : null}
         </div>
-        
+
         <div className={styles.communityInfo}>
 
           <div className={styles.iconContainer}>
-            <img src={CommunityIcon} alt="Icone de comunidade" className={styles.icon}/>
+            <img src={CommunityIcon} alt="Icone de comunidade" className={styles.icon} />
           </div>
 
-          <div className={styles.communityNameContainer}>           
+          <div className={styles.communityNameContainer}>
             <h1 className={styles.name}>{communityName}</h1>
-            <p className={styles.description}>{description}</p>         
+            <p className={styles.description}>{description}</p>
           </div>
 
         </div>
 
-          <button className={styles.actionButton}>{isInCommunity}</button>
+        <button className={styles.actionButton}>{isInCommunity}</button>
 
       </div>
-      <ListPosts endpoint="/posts/"/>
+      <div className={styles.postsContainer}>
+      <Link to="/criar-post" state={id}>
+        <button className={styles.actionButtonPost}>Criar Post</button>
+      </Link>
+      </div>
+
+      <ListPosts endpoint={`/posts/?community=${id}`} />
     </>
-  ); 
+  );
 };
 
 export default CommunityPage;

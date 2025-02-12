@@ -8,15 +8,17 @@ import { ClipLoader } from "react-spinners";
 
 interface ListPostsProps {
   endpoint: string;
+  communityId?: string;
 }
 
-const ListPosts: React.FC<ListPostsProps> = ({ endpoint }) => {
+const ListPosts: React.FC<ListPostsProps> = ({ endpoint, communityId }) => {
   const [posts, setPosts] = useState<any>()
 
   useEffect(() => {
     async function getPosts() {
       try {
-        const response = await api.get(endpoint)
+        const url = communityId ? `${endpoint}?community=${communityId}`: endpoint;
+        const response = await api.get(url);
         //console.log(response.data)
         setPosts(response.data)
       } catch (error) {
@@ -24,7 +26,7 @@ const ListPosts: React.FC<ListPostsProps> = ({ endpoint }) => {
       }
     }
     getPosts();
-  }, []);
+  }, [endpoint, communityId]);
 
   if (!posts) {
     return (
