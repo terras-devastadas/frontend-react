@@ -5,6 +5,7 @@ import styles from '../LateralBar/LateralBar.module.css';
 import CommunityIcon from '../../assets/CommunityIcon.png';
 import Avatar from "../../assets/AvatarPlaceholder.png";
 import ArrowLeft from '../../assets/ArrowLeft.png';
+import { useNavigate } from 'react-router-dom';
 
 interface Community {
   id: string;
@@ -17,6 +18,7 @@ const LateralBar = () => {
   const [username, setUsername] = useState("");
   // const [profilePicture, setProfilePicture] = useState();
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchCommunities() {
@@ -51,9 +53,15 @@ const LateralBar = () => {
       window.removeEventListener("community-joined", updateCommunities);
     };
   }, []);
-
-  const handleLogout = () => {}
-
+////////////////
+  const handleLogout = async () => {
+    const response = await api.post('/logout/');
+    if (response.status === 200) {
+      sessionStorage.clear();
+      navigate('/login');
+    }
+  }
+/////////////////
   return (
     <aside className={styles.sidebar}>
       <div className={styles.buttonsContainer}>
@@ -61,7 +69,8 @@ const LateralBar = () => {
           <Link to="/criar-comunidade" >
             <img src={CommunityIcon} alt="Criar comunidade" title='Criar comunidade' className={styles.createCommunityButton}/>
           </Link>
-        </div>  
+        </div>
+          
         <div className={styles.logoutContainer}>
             <img src={ArrowLeft} alt="Logout" onClick={handleLogout} className={styles.logout}/>
         </div>
